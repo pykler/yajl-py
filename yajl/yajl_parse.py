@@ -4,6 +4,7 @@ Code that allows use of api/yajl_parse.h
 
 import sys
 from yajl_common import *
+from abc import ABCMeta, abstractmethod
 
 # parser config
 class yajl_parser_config(Structure):
@@ -15,8 +16,8 @@ class yajl_parser_config(Structure):
 # Callback Functions
 YAJL_NULL = CFUNCTYPE(c_int, c_void_p)
 YAJL_BOOL = CFUNCTYPE(c_int, c_void_p, c_int)
-YAJL_INT  = c_int
-YAJL_DBL  = c_int
+YAJL_INT  = CFUNCTYPE(c_int, c_void_p, c_long)
+YAJL_DBL  = CFUNCTYPE(c_int, c_void_p, c_double)
 YAJL_NUM  = CFUNCTYPE(c_int, c_void_p, POINTER(c_ubyte), c_uint)
 YAJL_STR  = CFUNCTYPE(c_int, c_void_p, POINTER(c_ubyte), c_uint)
 YAJL_SDCT = CFUNCTYPE(c_int, c_void_p)
@@ -60,36 +61,129 @@ class YajlParseCancelled(YajlError):
     def __init__(self):
         self.value = 'Client Callback Cancelled Parse'
 
+class YajlContentHandler(object):
+    '''
+    Subclass this class and implement the callback routines that will be called
+
+    Note about handling of numbers (from yajl docs):
+      yajl will only convert numbers that can be represented in a double
+      or a long int.  All other numbers will be passed to the client
+      in string form using the yajl_number callback.  Furthermore, if
+      yajl_number is not NULL, it will always be used to return numbers,
+      that is yajl_integer and yajl_double will be ignored. If
+      yajl_number is NULL but one of yajl_integer or yajl_double are
+      defined, parsing of a number larger than is representable
+      in a double or long int will result in a parse error.
+
+    Due to the above, implementing yajl_number takes prescedence and the
+    yajl_integer & yajl_double callbacks will be ignored. For this reason
+    none of these three methods are enforced by the Abstract Base Class
+    '''
+    __metaclass__ = ABCMeta
+    @abstractmethod
+    def yajl_null(self, ctx):
+        pass
+    @abstractmethod
+    def yajl_boolean(self, ctx, boolVal):
+        pass
+#     @abstractmethod
+#     def yajl_integer(self, ctx, integerVal):
+#         pass
+#     @abstractmethod
+#     def yajl_double(self, ctx, doubleVal):
+#         pass
+#     @abstractmethod
+#     def yajl_number(self, ctx, stringVal):
+#         pass
+    @abstractmethod
+    def yajl_string(self, ctx, stringVal):
+        pass
+    @abstractmethod
+    def yajl_start_map(self, ctx):
+        pass
+    @abstractmethod
+    def yajl_map_key(self, ctx, stringVal):
+        pass
+    @abstractmethod
+    def yajl_end_map(self, ctx):
+        pass
+    @abstractmethod
+    def yajl_start_array(self, ctx):
+        pass
+    @abstractmethod
+    def yajl_end_array(self, ctx):
+        pass
+
+
 class YajlParser(object):
     '''
     A class that utilizes the Yajl C Library
     '''
-    def __init__(self, c, buf_siz=65536):
+    def __init__(self, content_handler, allow_comments=True, check_utf8=True, buf_siz=65536):
         '''
-        Takes a list of callback functions `c`. The functions
-        need to be in order and accepting the correct number
-        of parameters, they should also reutrn an int. See
-        yajl doc for more info on parameters and return
-        values.
-
-        Callbacks must return an integer return code
-
-        A callback return code of:
-            - 0 will cancel the parse.
-            - 1 will allow the parse to continue.
+        `allow_comments` specifies whether comments are allowed in the document
+        `check_utf8` specifies whether utf8 charachters are allowed in the document
+        `buf_siz` the number of bytes to process from the input stream at a time
         '''
         c_funcs = (
             YAJL_NULL, YAJL_BOOL, YAJL_INT, YAJL_DBL, YAJL_NUM,
             YAJL_STR, YAJL_SDCT, YAJL_DCTK, YAJL_EDCT, YAJL_SARR,
             YAJL_EARR
         )
-        if len(c) != len(c_funcs):
-            raise Exception("Must Pass %d Functions."%(len(c_funcs)))
-        for i in range(len(c)):
-            c[i] = c_funcs[i](c[i])
-        self.callbacks = yajl_callbacks(*c)
+        def yajl_null(ctx):
+            return dispatch('yajl_null', ctx)
+        def yajl_boolean(ctx, boolVal):
+            return dispatch('yajl_boolean', ctx, boolVal)
+        def yajl_integer(ctx, integerVal):
+            return dispatch('yajl_integer', ctx, integerVal)
+        def yajl_double(ctx, doubleVal):
+            return dispatch('yajl_double', ctx, doubleVal)
+        def yajl_number(ctx, stringVal, stringLen):
+            return dispatch('yajl_number', ctx, string_at(stringVal, stringLen))
+        def yajl_string(ctx, stringVal, stringLen):
+            return dispatch('yajl_string', ctx, string_at(stringVal, stringLen))
+        def yajl_start_map(ctx):
+            return dispatch('yajl_start_map', ctx)
+        def yajl_map_key(ctx, stringVal, stringLen):
+            return dispatch('yajl_map_key', ctx, string_at(stringVal, stringLen))
+        def yajl_end_map(ctx):
+            return dispatch('yajl_end_map', ctx)
+        def yajl_start_array(ctx):
+            return dispatch('yajl_start_array', ctx)
+        def yajl_end_array(ctx):
+            return dispatch('yajl_end_array', ctx)
+        def dispatch(func, *args, **kwargs):
+            try:
+                print func,args,kwargs
+                getattr(self.content_handler, func)(*args, **kwargs)
+                return 1
+            except Exception,e:
+                self._exc_info = sys.exc_info()
+                return 0
+
+        callbacks = [
+            yajl_null, yajl_boolean, yajl_integer, yajl_double,
+            yajl_number, yajl_string,
+            yajl_start_map, yajl_map_key, yajl_end_map,
+            yajl_start_array, yajl_end_array,
+        ]
+        # cannot have both number and integer|double
+        if hasattr(content_handler, 'yajl_number'):
+            # if yajl_number is available, it takes precedence
+            callbacks[2] = callbacks[3] = 0
+        else:
+            callbacks[4] = 0
+        # cast the funcs to C-types
+        callbacks = [
+            c_func(callback)
+            for c_func, callback in zip(c_funcs, callbacks)
+        ]
+
+        # set self's vars
         self.buf_siz = buf_siz
-        self.cfg = yajl_parser_config(1,1)
+        self.cfg = yajl_parser_config(allow_comments, check_utf8)
+        self.callbacks = yajl_callbacks(*callbacks)
+        self.content_handler = content_handler
 
     def parse(self, f=sys.stdin, ctx=None):
         '''Function to parse a JSON stream.
@@ -114,7 +208,12 @@ class YajlParser(object):
                 if  stat not in (yajl_status_ok.value,
                         yajl_status_insufficient_data.value):
                     if stat == yajl_status_client_canceled.value:
-                        raise YajlParseCancelled()
+                        # it means we have an exception
+                        if self._exc_info:
+                            exc_info = self._exc_info
+                            raise exc_info[0], exc_info[1], exc_info[2]
+                        else: # for some reason we have no error stored
+                            raise YajlParseCancelled()
                     else:
                         yajl.yajl_get_error.restype = c_char_p
                         error = yajl.yajl_get_error(

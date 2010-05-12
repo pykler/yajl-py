@@ -155,7 +155,6 @@ class YajlParser(object):
             return dispatch('yajl_end_array', ctx)
         def dispatch(func, *args, **kwargs):
             try:
-                print func,args,kwargs
                 getattr(self.content_handler, func)(*args, **kwargs)
                 return 1
             except Exception,e:

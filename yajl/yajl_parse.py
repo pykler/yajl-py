@@ -121,6 +121,7 @@ class YajlParser(object):
     '''
     def __init__(self, content_handler, allow_comments=True, check_utf8=True, buf_siz=65536):
         '''
+        `content_handler` an instance of a subclass of YajlContentHandler
         `allow_comments` specifies whether comments are allowed in the document
         `check_utf8` specifies whether utf8 charachters are allowed in the document
         `buf_siz` the number of bytes to process from the input stream at a time

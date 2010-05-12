@@ -51,7 +51,7 @@ class YajlConfigError(Exception):
     pass
 
 class YajlError(Exception):
-    def __init__(self, value):
+    def __init__(self, value=''):
         self.value = value
     def __str__(self):
         return self.value
@@ -104,7 +104,7 @@ class YajlParser(object):
         returns 0 should set internal variables to denote
         why they cancelled the parsing.
         '''
-        hand = yajl.yajl_alloc( byref(self.callbacks), byref(self.cfg), ctx)
+        hand = yajl.yajl_alloc( byref(self.callbacks), byref(self.cfg), None, ctx)
         try:
             while 1:
                 fileData = f.read(self.buf_siz-1)

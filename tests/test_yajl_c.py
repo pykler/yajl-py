@@ -47,18 +47,26 @@ class YajlCTests(MockTestCase):
         got = self.out.read() #.splitlines(1)
         self.failUnlessEqual(expected, got)
 
+    def resetOutput(self):
+        self.out.seek(0)
+        self.out.truncate()
+
 def _make_test(filename, testname):
     def test(self):
         kwargs = {}
         if testname.startswith('dc_'):
             kwargs['allow_comments'] = False
-        parser = yajl.YajlParser(self.content_handler, **kwargs)
-        with open(filename) as f:
-            try:
-                parser.parse(f)
-            except yajl.YajlError, e:
-                self.out.write('%s\n' %str(e).splitlines()[0])
-        self.assertSameAsGold(filename)
+        for buf_siz in range(32):
+            # try out a range of buffer_sizes to stress stream parsing
+            kwargs['buf_siz'] = buf_siz + 1
+            parser = yajl.YajlParser(self.content_handler, **kwargs)
+            with open(filename) as f:
+                try:
+                    parser.parse(f)
+                except yajl.YajlError, e:
+                    self.out.write('%s\n' %str(e).splitlines()[0])
+            self.assertSameAsGold(filename)
+            self.resetOutput()
     return test
 
 def _add_methods():

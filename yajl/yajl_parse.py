@@ -126,6 +126,9 @@ class YajlParser(object):
         `check_utf8` specifies whether utf8 charachters are allowed in the document
         `buf_siz` the number of bytes to process from the input stream at a time
         '''
+        # input validation
+        if buf_siz <= 0:
+            raise YajlConfigError('Buffer Size (buf_siz) must be set > 0')
         c_funcs = (
             YAJL_NULL, YAJL_BOOL, YAJL_INT, YAJL_DBL, YAJL_NUM,
             YAJL_STR, YAJL_SDCT, YAJL_DCTK, YAJL_EDCT, YAJL_SARR,
@@ -189,7 +192,6 @@ class YajlParser(object):
         '''Function to parse a JSON stream.
         Parameters:
           `f`        : file stream to read from
-          `buf_size` : size in bytes of read buffer
           `ctx`      : A ctypes pointer that will be passed to
                        all callback functions as the first param
 
@@ -201,7 +203,7 @@ class YajlParser(object):
         hand = yajl.yajl_alloc( byref(self.callbacks), byref(self.cfg), None, ctx)
         try:
             while 1:
-                fileData = f.read(self.buf_siz-1)
+                fileData = f.read(self.buf_siz)
                 if not fileData:
                     stat = yajl.yajl_parse_complete(hand)
                 else:

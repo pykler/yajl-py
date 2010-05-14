@@ -123,3 +123,9 @@ class YajlGeneralTests(MockTestCase):
             "Called self.content_handler.yajl_end_map(%(ctx)s)\n"
             % {'ctx': repr(yajl.addressof(ctx))}
         )
+
+    def test_bufSizeLessThanZeroRaisesException(self):
+        for buf_siz in range(-5, 1):
+            self.failUnlessRaises(
+                yajl.YajlConfigError,
+                yajl.YajlParser, self.content_handler, buf_siz=buf_siz)

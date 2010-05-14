@@ -1,79 +1,42 @@
-import sys; sys.path = ['.', '..'] + sys.path
+import os
+import sys
+BASEPATH = os.path.dirname(os.path.realpath(__file__))
+sys.path = [BASEPATH, '%s/..' %BASEPATH] + sys.path
 from yajl import *
 
-# Sample callbacks, which reprint invalid json
+# Sample callbacks, which output some debug info
 # these are examples to show off the yajl parser
-
-def yajl_null(ctx):
-    print "null"
-    return 1
-
-def yajl_boolean(ctx, boolVal):
-    if boolVal:
-        print "true,"
-    else:
-        print "false,"
-    return 1
-
-def yajl_integer(ctx, integerVal):
-    print "%s,"%integerVal
-    return 1
-
-def yajl_double(ctx, doubleVal):
-    print "%s,"%doubleVal
-    return 1
-
-def yajl_number(ctx, stringNum, stringLen):
-    nstr = string_at(stringNum, stringLen)
-    if '.' in nstr:
-        num = float(nstr)
-    else:
-        num = int(nstr)
-    print '%s(%s)'%(num,type(num))
-    return 1
-
-def yajl_string(ctx, stringVal, stringLen):
-    print '"%s",'%string_at(stringVal, stringLen)
-    return 1
-
-def yajl_start_map(ctx):
-    print "{"
-    return 1
-
-def yajl_map_key(ctx, stringVal, stringLen):
-    print '"%s":'%string_at(stringVal, stringLen),
-    return 1
-
-def yajl_end_map(ctx):
-    print "},"
-    return 1
-
-def yajl_start_array(ctx):
-    print "["
-    return 1
-
-def yajl_end_array(ctx):
-    print "],"
-    return 1
+class ContentHandler(YajlContentHandler):
+    def __init__(self):
+        self.out = sys.stdout
+    def yajl_null(self, ctx):
+        self.out.write("null\n" )
+    def yajl_boolean(self, ctx, boolVal):
+        self.out.write("bool: %s\n" %('true' if boolVal else 'false'))
+    def yajl_integer(self, ctx, integerVal):
+        self.out.write("integer: %s\n" %integerVal)
+    def yajl_double(self, ctx, doubleVal):
+        self.out.write("double: %s\n" %doubleVal)
+    def yajl_number(self, ctx, stringNum):
+        ''' Since this is defined both integer and double callbacks are useless '''
+        num = float(stringNum) if '.' in stringNum else int(stringNum)
+        self.out.write("number: %s\n" %num)
+    def yajl_string(self, ctx, stringVal):
+        self.out.write("string: '%s'\n" %stringVal)
+    def yajl_start_map(self, ctx):
+        self.out.write("map open '{'\n")
+    def yajl_map_key(self, ctx, stringVal):
+        self.out.write("key: '%s'\n" %stringVal)
+    def yajl_end_map(self, ctx):
+        self.out.write("map close '}'\n")
+    def yajl_start_array(self, ctx):
+        self.out.write("array open '['\n")
+    def yajl_end_array(self, ctx):
+        self.out.write("array close ']'\n")
 
 
 def main(args):
-    callbacks = [
-        yajl_null,
-        yajl_boolean,
-        #yajl_integer,
-        #yajl_double,
-        0, #replacing integer callback with NULL
-        0, #replacing double callback with NULL
-        yajl_number, # cannot have this and (double or integer)
-        yajl_string,
-        yajl_start_map,
-        yajl_map_key,
-        yajl_end_map,
-        yajl_start_array,
-        yajl_end_array
-    ]
-    parser = YajlParser(callbacks)
+    parser = YajlParser(ContentHandler())
     if args:
         for fn in args:
             f = open(fn)
@@ -82,3 +45,6 @@ def main(args):
     else:
         parser.parse()
     return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))

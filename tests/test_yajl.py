@@ -24,7 +24,7 @@ class BaseContentHandler(yajl.YajlContentHandler):
     def yajl_end_array(self, ctx):
         pass
 
-class YajlGeneralTests(MockTestCase):
+class YajlPyTests(MockTestCase):
     '''
     Testing YAJL-PY interfaces/callbacks
 

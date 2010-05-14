@@ -9,7 +9,7 @@ setup(name='yajl-py',
       long_description="""\
 Pure Python wrapper to the excellent Yajl (Yet Another Json Library) C library""",
       classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
-      keywords='yajl,json',
+      keywords='yajl json parsing',
       author='Hatem Nassrat',
       author_email='hnassrat@gmail.com',
       url='http://github.com/pykler/yajl-py',

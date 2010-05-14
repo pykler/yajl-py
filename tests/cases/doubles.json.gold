@@ -1,0 +1,7 @@
+array open '['
+double: 10.0
+double: 10.0
+double: 3.141569
+double: 1000.0
+array close ']'
+memory leaks:	0

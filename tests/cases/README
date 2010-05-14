@@ -1,0 +1,9 @@
+These test cases were pulled in from:
+
+    http://github.com/lloyd/yajl/tree/master/test/cases/
+
+To do some extra testing of the Yajl-Py Yajl wrapper.
+
+The following files were modified to match output of python:
+
+    doubles.json.gold

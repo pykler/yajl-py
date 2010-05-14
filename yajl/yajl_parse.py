@@ -203,8 +203,9 @@ class YajlParser(object):
             while 1:
                 fileData = f.read(self.buf_siz-1)
                 if not fileData:
-                    break
-                stat = yajl.yajl_parse(hand, fileData, len(fileData))
+                    stat = yajl.yajl_parse_complete(hand)
+                else:
+                    stat = yajl.yajl_parse(hand, fileData, len(fileData))
                 if  stat not in (yajl_status_ok.value,
                         yajl_status_insufficient_data.value):
                     if stat == yajl_status_client_canceled.value:
@@ -219,5 +220,7 @@ class YajlParser(object):
                         error = yajl.yajl_get_error(
                             hand, 1, fileData, len(fileData))
                         raise YajlError(error)
+                if not fileData:
+                    break
         finally:
             yajl.yajl_free(hand)

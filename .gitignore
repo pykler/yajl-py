@@ -1,0 +1,16 @@
+# HG Revert
+*.orig
+
+# vi swap files
+*.swp
+# backup & tmp/* files
+*.bak
+tmp/
+
+# py compiled files
+*.pyc
+*.pyo
+
+# python garbage
+build/
+*.egg-info/

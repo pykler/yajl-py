@@ -9,8 +9,13 @@ library.
 Dependencies
 ------------
 
-    - python 2.5 (or compatible)
-    - yajl: http://lloydforge.org/projects/yajl/
+    - python 2.6 (or compatible)
+    - yajl (from http://lloydforge.org/projects/yajl/)
+
+To run the tests you also require:
+
+    - make (to run `make test`)
+    - nose (debian package == `python-nose`)
 
 Install
 -------
@@ -26,8 +31,5 @@ From within the current directory run::
 Usage
 -----
 
-The examples directory contains a full featured JSON Parser
-built using `yajl` and `yajl-py`. The code also prints some
-output to stdout after parsing json from stdin. The printing
-is more or less debug messages to show how the parser works.
-See `examples/README.rst` for more info.
+The examples directory contains a full featured JSON Parsers built
+using `yajl` and `yajl-py`. See `examples/README.rst` for more info.

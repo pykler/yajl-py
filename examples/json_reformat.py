@@ -17,35 +17,33 @@ class ReformatContentHandler(YajlContentHandler):
     '''
     def __init__(self, beautify=True, indent="  "):
         self.out = sys.stdout
-        self.conf = yajl_gen_config(beautify, indent)
+        self.beautify = beautify
+        self.indent = indent
     def parse_start(self):
-        self.g = yajl.yajl_gen_alloc(byref(self.conf), None)
+        self.g = YajlGen(beautify=self.beautify, indent=self.indent)
     def parse_buf(self):
-        l = c_uint()
-        buf = POINTER(c_ubyte)()
-        yajl.yajl_gen_get_buf(self.g, byref(buf), byref(l))
-        self.out.write(string_at(buf, l.value))
-        yajl.yajl_gen_clear(self.g)
+        self.out.write(self.g.yajl_gen_get_buf())
     def parse_complete(self):
-        yajl.yajl_gen_free(self.g)
+        # not necessary, gc will do this @ python shutdown
+        del self.g
     def yajl_null(self, ctx):
-        yajl.yajl_gen_null(self.g)
+        self.g.yajl_gen_null()
     def yajl_boolean(self, ctx, boolVal):
-        yajl.yajl_gen_bool(self.g, boolVal)
+        self.g.yajl_gen_bool(boolVal)
     def yajl_number(self, ctx, stringNum):
-        yajl.yajl_gen_number(self.g, c_char_p(stringNum), len(stringNum))
+        self.g.yajl_gen_number(stringNum)
     def yajl_string(self, ctx, stringVal):
-        yajl.yajl_gen_string(self.g, c_char_p(stringVal), len(stringVal))
+        self.g.yajl_gen_string(stringVal)
     def yajl_start_map(self, ctx):
-        yajl.yajl_gen_map_open(self.g)
+        self.g.yajl_gen_map_open()
     def yajl_map_key(self, ctx, stringVal):
-        yajl.yajl_gen_string(self.g, c_char_p(stringVal), len(stringVal))
+        self.g.yajl_gen_string(stringVal)
     def yajl_end_map(self, ctx):
-        yajl.yajl_gen_map_close(self.g)
+        self.g.yajl_gen_map_close()
     def yajl_start_array(self, ctx):
-        yajl.yajl_gen_array_open(self.g)
+        self.g.yajl_gen_array_open()
     def yajl_end_array(self, ctx):
-        yajl.yajl_gen_array_close(self.g)
+        self.g.yajl_gen_array_close()
 
 
 def main():

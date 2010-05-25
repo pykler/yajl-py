@@ -31,5 +31,5 @@ From within the current directory run::
 Usage
 -----
 
-The examples directory contains a full featured JSON Parsers built
-using `yajl` and `yajl-py`. See `examples/README.rst` for more info.
+The examples directory contains full featured JSON Parsers built using
+`yajl` and `yajl-py`. See `examples/README.rst` for more info.

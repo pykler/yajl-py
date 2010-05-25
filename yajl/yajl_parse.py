@@ -113,7 +113,12 @@ class YajlContentHandler(object):
     @abstractmethod
     def yajl_end_array(self, ctx):
         pass
-
+    def parse_start(self):
+        ''' Called before each stream is parsed '''
+    def parse_buf(self):
+        ''' Called when a complete buffer has been parsed from the stream '''
+    def parse_complete(self):
+        ''' Called when the parsing of the stream has finished '''
 
 class YajlParser(object):
     '''
@@ -200,6 +205,7 @@ class YajlParser(object):
         returns 0 should set internal variables to denote
         why they cancelled the parsing.
         '''
+        self.content_handler.parse_start()
         hand = yajl.yajl_alloc( byref(self.callbacks), byref(self.cfg), None, ctx)
         try:
             while 1:
@@ -208,6 +214,7 @@ class YajlParser(object):
                     stat = yajl.yajl_parse_complete(hand)
                 else:
                     stat = yajl.yajl_parse(hand, fileData, len(fileData))
+                self.content_handler.parse_buf()
                 if  stat not in (yajl_status_ok.value,
                         yajl_status_insufficient_data.value):
                     if stat == yajl_status_client_canceled.value:
@@ -223,6 +230,7 @@ class YajlParser(object):
                             hand, 1, fileData, len(fileData))
                         raise YajlError(error)
                 if not fileData:
+                    self.content_handler.parse_complete()
                     break
         finally:
             yajl.yajl_free(hand)

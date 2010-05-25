@@ -1,4 +1,4 @@
-from yajl_test_lib import * 
+from yajl_test_lib import *
 
 class BaseContentHandler(yajl.YajlContentHandler):
     def yajl_null(self, ctx):
@@ -89,7 +89,7 @@ class YajlPyTests(MockTestCase):
             "Called self.content_handler.yajl_end_array(None)\n"
             "Called self.content_handler.yajl_end_map(None)\n"
         )
-    
+
     def test_largestNumberAcceptableInIntegerCallback(self):
         good_json = StringIO('[%s]' %(sys.maxint))
         bad_json = StringIO('[%s]' %(sys.maxint + 1))
@@ -129,3 +129,14 @@ class YajlPyTests(MockTestCase):
             self.failUnlessRaises(
                 yajl.YajlConfigError,
                 yajl.YajlParser, self.content_handler, buf_siz=buf_siz)
+
+    def test_allowsNoCallbacks(self):
+        parser = yajl.YajlParser()
+        parser.parse(self.basic_json)
+
+    def test_raisesExceptionOnInvalidJson(self):
+        parser = yajl.YajlParser()
+        invalid_json = StringIO('{ "a": }')
+        self.failUnlessRaises(
+            yajl.YajlError,
+            parser.parse, invalid_json)

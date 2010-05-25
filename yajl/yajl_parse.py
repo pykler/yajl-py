@@ -124,7 +124,7 @@ class YajlParser(object):
     '''
     A class that utilizes the Yajl C Library
     '''
-    def __init__(self, content_handler, allow_comments=True, check_utf8=True, buf_siz=65536):
+    def __init__(self, content_handler=None, allow_comments=True, check_utf8=True, buf_siz=65536):
         '''
         `content_handler` an instance of a subclass of YajlContentHandler
         `allow_comments` specifies whether comments are allowed in the document
@@ -169,28 +169,31 @@ class YajlParser(object):
                 self._exc_info = sys.exc_info()
                 return 0
 
-        callbacks = [
-            yajl_null, yajl_boolean, yajl_integer, yajl_double,
-            yajl_number, yajl_string,
-            yajl_start_map, yajl_map_key, yajl_end_map,
-            yajl_start_array, yajl_end_array,
-        ]
-        # cannot have both number and integer|double
-        if hasattr(content_handler, 'yajl_number'):
-            # if yajl_number is available, it takes precedence
-            callbacks[2] = callbacks[3] = 0
+        if content_handler is None:
+            self.callbacks = None
         else:
-            callbacks[4] = 0
-        # cast the funcs to C-types
-        callbacks = [
-            c_func(callback)
-            for c_func, callback in zip(c_funcs, callbacks)
-        ]
+            callbacks = [
+                yajl_null, yajl_boolean, yajl_integer, yajl_double,
+                yajl_number, yajl_string,
+                yajl_start_map, yajl_map_key, yajl_end_map,
+                yajl_start_array, yajl_end_array,
+            ]
+            # cannot have both number and integer|double
+            if hasattr(content_handler, 'yajl_number'):
+                # if yajl_number is available, it takes precedence
+                callbacks[2] = callbacks[3] = 0
+            else:
+                callbacks[4] = 0
+            # cast the funcs to C-types
+            callbacks = [
+                c_func(callback)
+                for c_func, callback in zip(c_funcs, callbacks)
+            ]
+            self.callbacks = byref(yajl_callbacks(*callbacks))
 
         # set self's vars
         self.buf_siz = buf_siz
         self.cfg = yajl_parser_config(allow_comments, check_utf8)
-        self.callbacks = yajl_callbacks(*callbacks)
         self.content_handler = content_handler
 
     def parse(self, f=sys.stdin, ctx=None):
@@ -205,8 +208,9 @@ class YajlParser(object):
         returns 0 should set internal variables to denote
         why they cancelled the parsing.
         '''
-        self.content_handler.parse_start()
-        hand = yajl.yajl_alloc( byref(self.callbacks), byref(self.cfg), None, ctx)
+        if self.content_handler:
+            self.content_handler.parse_start()
+        hand = yajl.yajl_alloc(self.callbacks, byref(self.cfg), None, ctx)
         try:
             while 1:
                 fileData = f.read(self.buf_siz)
@@ -214,7 +218,8 @@ class YajlParser(object):
                     stat = yajl.yajl_parse_complete(hand)
                 else:
                     stat = yajl.yajl_parse(hand, fileData, len(fileData))
-                self.content_handler.parse_buf()
+                if self.content_handler:
+                    self.content_handler.parse_buf()
                 if  stat not in (yajl_status_ok.value,
                         yajl_status_insufficient_data.value):
                     if stat == yajl_status_client_canceled.value:
@@ -230,7 +235,8 @@ class YajlParser(object):
                             hand, 1, fileData, len(fileData))
                         raise YajlError(error)
                 if not fileData:
-                    self.content_handler.parse_complete()
+                    if self.content_handler:
+                        self.content_handler.parse_complete()
                     break
         finally:
             yajl.yajl_free(hand)

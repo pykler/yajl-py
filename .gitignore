@@ -12,5 +12,6 @@ tmp/
 *.pyo
 
 # python garbage
+dist/
 build/
 *.egg-info/

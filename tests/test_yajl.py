@@ -124,7 +124,7 @@ class YajlPyTests(MockTestCase):
             % {'ctx': repr(yajl.addressof(ctx))}
         )
 
-    def test_bufSizeLessThanZeroRaisesException(self):
+    def test_bufSizeLessThanOneRaisesException(self):
         for buf_siz in range(-5, 1):
             self.failUnlessRaises(
                 yajl.YajlConfigError,
@@ -140,3 +140,41 @@ class YajlPyTests(MockTestCase):
         self.failUnlessRaises(
             yajl.YajlError,
             parser.parse, invalid_json)
+
+    def test_load_yajl_raisesOSErrorIfYajlNotFound(self):
+        self.mock('yajl.cdll.LoadLibrary', raises=OSError('ABCD'))
+        e = None
+        try:
+            yajl.load_yajl()
+        except OSError, e:
+            pass
+        self.failUnless('Yajl shared object cannot be found.' in str(e))
+
+    def test_get_yajl_version_correctlyParsesYajlVersion(self):
+        for major in [0, 1, 3, 7]:
+            for minor in [0, 1, 2, 5]:
+                for micro in [0, 5, 10, 15, 20]:
+                    yajl_version = major * 10000 + minor * 100 + micro
+                    self.mock('yajl.yajl.yajl_version', returns=yajl_version)
+                    self.failUnlessEqual(
+                        '%s.%s.%s' %(major, minor, micro),
+                        yajl.get_yajl_version())
+
+    def test_check_yajl_version_warnsOnlyWhenMismatchedVersions(self):
+        import warnings
+        self.mock('warnings.warn', [locals()])
+        self.mock('yajl.__version__', mock_obj='1.1.1')
+        self.mock('yajl.yajl_version', mock_obj='1.1.1')
+        self.failUnless(yajl.check_yajl_version())
+        self.assertSameTrace('')
+        self.mock('yajl.yajl_version', mock_obj='1.1.0')
+        self.failIf(yajl.check_yajl_version())
+        self.assertSameTrace(
+            "Called warnings.warn("
+                "'Using Yajl-Py v1.1.1 with Yajl v1.1.0. "
+                "It is advised to use the same Yajl-Py and Yajl versions',"
+                "<type 'exceptions.RuntimeWarning'>, stacklevel=3)"
+        )
+
+    def test_checkYajlPyAndYajlHaveSameVersion(self):
+        self.failUnless(yajl.check_yajl_version())

@@ -40,11 +40,11 @@ class YajlCTests(MockTestCase):
 
     def assertSameAsGold(self, filename):
         with open('%s.gold' %filename) as f:
-            expected = f.read() #f.readlines()[:-1]
+            expected = f.read()
         # we currently do not test for memory leaks
         expected = expected.replace('memory leaks:\t0\n', '')
         self.out.seek(0)
-        got = self.out.read() #.splitlines(1)
+        got = self.out.read()
         self.failUnlessEqual(expected, got)
 
     def resetOutput(self):
@@ -56,9 +56,9 @@ def _make_test(filename, testname):
         kwargs = {}
         if testname.startswith('dc_'):
             kwargs['allow_comments'] = False
-        for buf_siz in range(32):
+        for buf_siz in range(1, 32):
             # try out a range of buffer_sizes to stress stream parsing
-            kwargs['buf_siz'] = buf_siz + 1
+            kwargs['buf_siz'] = buf_siz
             parser = yajl.YajlParser(self.content_handler, **kwargs)
             with open(filename) as f:
                 try:

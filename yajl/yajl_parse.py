@@ -48,24 +48,18 @@ yajl_status_insufficient_data,
 yajl_status_error
 ) = map(c_int, range(4))
 
-class YajlConfigError(Exception):
-    pass
-
-class YajlError(Exception):
-    def __init__(self, value=''):
-        self.value = value
-    def __str__(self):
-        return self.value
-
 class YajlParseCancelled(YajlError):
     def __init__(self):
         self.value = 'Client Callback Cancelled Parse'
 
 class YajlContentHandler(object):
     '''
-    Subclass this class and implement the callback routines that will be called
+    Subclass this Abstract Base Class and implement the callback routines that
+    will be called by the :class:`YajlParser` instance that you will pass an
+    instance of the subclass (phew! did you get that?) to.
 
     Note about handling of numbers (from yajl docs):
+
       yajl will only convert numbers that can be represented in a double
       or a long int.  All other numbers will be passed to the client
       in string form using the yajl_number callback.  Furthermore, if
@@ -75,9 +69,10 @@ class YajlContentHandler(object):
       defined, parsing of a number larger than is representable
       in a double or long int will result in a parse error.
 
-    Due to the above, implementing yajl_number takes prescedence and the
-    yajl_integer & yajl_double callbacks will be ignored. For this reason
-    none of these three methods are enforced by the Abstract Base Class
+    Due to the above, implementing :meth:`yajl_number` takes prescedence and
+    the :meth:`yajl_integer` & :meth:`yajl_double` callbacks will be ignored.
+    For this reason none of these three methods are enforced by the Abstract
+    Base Class
     '''
     __metaclass__ = ABCMeta
     @abstractmethod
@@ -198,10 +193,12 @@ class YajlParser(object):
 
     def parse(self, f=sys.stdin, ctx=None):
         '''Function to parse a JSON stream.
+
         Parameters:
-          `f`        : file stream to read from
-          `ctx`      : A ctypes pointer that will be passed to
-                       all callback functions as the first param
+
+            * `f` - file stream to read from
+            * `ctx` - A ctypes pointer that will be passed to all 
+              callback functions as the first param
 
         Raises an expception upon error or return value of 0
         from callback functions. A callback function that

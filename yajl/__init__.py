@@ -1,5 +1,13 @@
 '''
 Pure Python wrapper to the Yajl C library
+
+.. data:: __version__
+
+    Version of yajl-py
+
+.. data:: yajl_version
+
+    Version of the yajl library that was loaded
 '''
 
 from yajl_common import *
@@ -10,6 +18,12 @@ __version__ = '1.0.10'
 yajl_version = get_yajl_version()
 
 def check_yajl_version():
+    '''
+    :rtype: bool
+
+    Returns True, if the version of yajl is identical to the version of yajl-py
+    otherwise displays a RuntimeWarning and returns False.
+    '''
     if __version__ != yajl_version:
         import warnings
         warnings.warn(

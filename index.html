@@ -91,6 +91,74 @@ versions. The code is layed out in a similar fashion to the C code such
 that one can follow the logic.</p>
 <div class="section" id="quick-example">
 <h3>Quick Example<a class="headerlink" href="#quick-example" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="parsing">
+<h4>Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">yajl</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c"># Sample callbacks, which output some debug info</span>
+<span class="c"># these are examples to show off the yajl parser</span>
+<span class="k">class</span> <span class="nc">ContentHandler</span><span class="p">(</span><span class="n">YajlContentHandler</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+    <span class="k">def</span> <span class="nf">yajl_null</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;null</span><span class="se">\n</span><span class="s">&quot;</span> <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">yajl_boolean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">boolVal</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;bool: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="s">&#39;true&#39;</span> <span class="k">if</span> <span class="n">boolVal</span> <span class="k">else</span> <span class="s">&#39;false&#39;</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">yajl_integer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">integerVal</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;integer: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">integerVal</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">yajl_double</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">doubleVal</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;double: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">doubleVal</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">yajl_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">stringNum</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Since this is defined both integer and double callbacks are useless &#39;&#39;&#39;</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stringNum</span><span class="p">)</span> <span class="k">if</span> <span class="s">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">stringNum</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">stringNum</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;number: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">num</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">yajl_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">stringVal</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;string: &#39;</span><span class="si">%s</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">stringVal</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">yajl_start_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;map open &#39;{&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">yajl_map_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">stringVal</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;key: &#39;</span><span class="si">%s</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">stringVal</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">yajl_end_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;map close &#39;}&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">yajl_start_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;array open &#39;[&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">yajl_end_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;array close &#39;]&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+
+<span class="c"># Create the parser</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">YajlParser</span><span class="p">(</span><span class="n">ContentHandler</span><span class="p">())</span>
+<span class="c"># Parse JSON from stdin</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generating">
+<h4>Generating<a class="headerlink" href="#generating" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">yajl</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">YajlGen</span><span class="p">(</span><span class="n">beautify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_map_open</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_string</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_array_open</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_null</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_bool</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_integer</span><span class="p">(</span><span class="mf">1</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_double</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_number</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mf">3</span><span class="p">))</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_get_buf</span><span class="p">()</span>
+<span class="c"># [Out]: &#39;{&quot;a&quot;:[null,true,1,2,3&#39;</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_string</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_array_close</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_map_close</span><span class="p">()</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_get_buf</span><span class="p">()</span>
+<span class="c"># [Out]: &#39;,&quot;b&quot;]}&#39;</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="documentaion">
@@ -143,7 +211,11 @@ docstrings:</p>
 <li><a class="reference external" href="#alternatives">Alternatives</a></li>
 <li><a class="reference external" href="#versioning">Versioning</a></li>
 <li><a class="reference external" href="#examples">Examples</a><ul>
-<li><a class="reference external" href="#quick-example">Quick Example</a></li>
+<li><a class="reference external" href="#quick-example">Quick Example</a><ul>
+<li><a class="reference external" href="#parsing">Parsing</a></li>
+<li><a class="reference external" href="#generating">Generating</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference external" href="#documentaion">Documentaion</a><ul>

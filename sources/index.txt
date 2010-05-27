@@ -29,7 +29,7 @@ For the development version you may visit
 Alternatives
 ------------
 
-Another python library that wraps yajl for python is 
+Another python library that wraps yajl for python is
 `py-yajl <http://github.com/rtyler/py-yajl/>`_. py-yajl creates an
 alternative to the built in json.loads and json.dumps using yajl. On the
 other hand, yajl-py wraps only yajl's functionality giving the user the
@@ -58,7 +58,73 @@ that one can follow the logic.
 Quick Example
 .............
 
-.. write some quick example here
+Parsing
++++++++
+.. code-block:: python
+
+    import sys
+    from yajl import *
+
+    # Sample callbacks, which output some debug info
+    # these are examples to show off the yajl parser
+    class ContentHandler(YajlContentHandler):
+        def __init__(self):
+            self.out = sys.stdout
+        def yajl_null(self, ctx):
+            self.out.write("null\n" )
+        def yajl_boolean(self, ctx, boolVal):
+            self.out.write("bool: %s\n" %('true' if boolVal else 'false'))
+        def yajl_integer(self, ctx, integerVal):
+            self.out.write("integer: %s\n" %integerVal)
+        def yajl_double(self, ctx, doubleVal):
+            self.out.write("double: %s\n" %doubleVal)
+        def yajl_number(self, ctx, stringNum):
+            ''' Since this is defined both integer and double callbacks are useless '''
+            num = float(stringNum) if '.' in stringNum else int(stringNum)
+            self.out.write("number: %s\n" %num)
+        def yajl_string(self, ctx, stringVal):
+            self.out.write("string: '%s'\n" %stringVal)
+        def yajl_start_map(self, ctx):
+            self.out.write("map open '{'\n")
+        def yajl_map_key(self, ctx, stringVal):
+            self.out.write("key: '%s'\n" %stringVal)
+        def yajl_end_map(self, ctx):
+            self.out.write("map close '}'\n")
+        def yajl_start_array(self, ctx):
+            self.out.write("array open '['\n")
+        def yajl_end_array(self, ctx):
+            self.out.write("array close ']'\n")
+
+    # Create the parser
+    parser = YajlParser(ContentHandler())
+    # Parse JSON from stdin
+    parser.parse()
+
+Generating
+++++++++++
+.. code-block:: python
+
+    from yajl import *
+
+    g = YajlGen(beautify=False)
+    g.yajl_gen_map_open()
+    g.yajl_gen_string("a")
+    g.yajl_gen_array_open()
+    g.yajl_gen_null()
+    g.yajl_gen_bool(True)
+    g.yajl_gen_integer(1)
+    g.yajl_gen_double(2.0)
+    g.yajl_gen_number(str(3))
+
+    g.yajl_gen_get_buf()
+    # [Out]: '{"a":[null,true,1,2,3'
+
+    g.yajl_gen_string("b")
+    g.yajl_gen_array_close()
+    g.yajl_gen_map_close()
+
+    g.yajl_gen_get_buf()
+    # [Out]: ',"b"]}'
 
 Documentaion
 ------------
@@ -80,7 +146,7 @@ docstrings:
 .. toctree::
 
     yajl/index
- 
+
 Indices and tables
 ==================
 

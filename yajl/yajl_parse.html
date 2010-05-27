@@ -75,6 +75,9 @@ in a double or long int will result in a parse error.</blockquote>
 the <tt class="xref docutils literal"><span class="pre">yajl_integer()</span></tt> &amp; <tt class="xref docutils literal"><span class="pre">yajl_double()</span></tt> callbacks will be ignored.
 For this reason none of these three methods are enforced by the Abstract
 Base Class</p>
+<p><strong>Note</strong> all methods must accept a param <tt class="xref docutils literal"><span class="pre">ctx</span></tt> as the first argument,
+this is a yajl feature that is implemented in yajl-py but not very useful
+in python.  see <a title="yajl.yajl_parse.YajlParser.parse" class="reference internal" href="#yajl.yajl_parse.YajlParser.parse"><tt class="xref docutils literal"><span class="pre">YajlParser.parse()</span></tt></a> for more info on <tt class="xref docutils literal"><span class="pre">ctx</span></tt>.</p>
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.parse_buf">
 <tt class="descname">parse_buf</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.parse_buf" title="Permalink to this definition">¶</a></dt>
@@ -137,26 +140,44 @@ Base Class</p>
 <em class="property">class </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">YajlParser</tt><big>(</big><em>content_handler=None</em>, <em>allow_comments=True</em>, <em>check_utf8=True</em>, <em>buf_siz=65536</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
 <p>A class that utilizes the Yajl C Library</p>
-<p><cite>content_handler</cite> an instance of a subclass of YajlContentHandler
-<cite>allow_comments</cite> specifies whether comments are allowed in the document
-<cite>check_utf8</cite> specifies whether utf8 charachters are allowed in the document
-<cite>buf_siz</cite> the number of bytes to process from the input stream at a time</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>content_handler</em> (<a title="yajl.yajl_parse.YajlContentHandler" class="reference internal" href="#yajl.yajl_parse.YajlContentHandler"><tt class="xref docutils literal"><span class="pre">YajlContentHandler</span></tt></a>) &#8211; content handler instance hosting the
+callbacks that will be called while parsing.</li>
+<li><em>allow_comments</em> (bool) &#8211; if comments are allowed in the document</li>
+<li><em>check_utf8</em> (bool) &#8211; if utf8 charachters are allowed in the document</li>
+<li><em>buf_siz</em> (int) &#8211; number of bytes to process from the input stream
+at a time (minimum 1)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlParser.parse">
-<tt class="descname">parse</tt><big>(</big><em>f=&lt;open file '&lt;stdin&gt;'</em>, <em>mode 'r' at 0x2b4bc3f220c0&gt;</em>, <em>ctx=None</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser.parse" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">parse</tt><big>(</big><em>f=&lt;open file '&lt;stdin&gt;'</em>, <em>mode 'r' at 0x2b56349f70c0&gt;</em>, <em>ctx=None</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to parse a JSON stream.</p>
-<p>Parameters:</p>
-<blockquote>
-<ul class="simple">
-<li><cite>f</cite> - file stream to read from</li>
-<li><cite>ctx</cite> - A ctypes pointer that will be passed to all 
-callback functions as the first param</li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><em>f</em> (file) &#8211; stream to parse JSON from</li>
+<li><em>ctx</em> (ctypes.POINTER) &#8211; passed to all callback functions as the first param this is
+a feature of yajl, and not very useful in yajl-py since the context is
+preserved using the content_handler instance.</li>
 </ul>
-</blockquote>
-<p>Raises an expception upon error or return value of 0
-from callback functions. A callback function that
-returns 0 should set internal variables to denote
-why they cancelled the parsing.</p>
+</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises YajlError:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body"><p class="first last">When invalid JSON in input stream found</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>

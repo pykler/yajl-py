@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>yajl.yajl_common &mdash; Yajl-Py v1.0.10 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.10',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Yajl-Py v1.0.10 documentation" href="../index.html" />
+    <link rel="up" title="yajl" href="index.html" />
+    <link rel="next" title="yajl.yajl_gen" href="yajl_gen.html" />
+    <link rel="prev" title="yajl" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="yajl_gen.html" title="yajl.yajl_gen"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="yajl"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Yajl-Py v1.0.10 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">yajl</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-yajl.yajl_common">
+<h1>yajl.yajl_common<a class="headerlink" href="#module-yajl.yajl_common" title="Permalink to this headline">¶</a></h1>
+<p>Common functions and members used by yajl-py (parse and gen)</p>
+<dl class="data">
+<dt id="yajl.yajl_common.yajl">
+<tt class="descclassname">yajl.yajl_common.</tt><tt class="descname">yajl</tt><a class="headerlink" href="#yajl.yajl_common.yajl" title="Permalink to this definition">¶</a></dt>
+<dd>The loaded <tt class="docutils literal"><span class="pre">ctypes.cdll</span></tt> handle to libyajl shared object. This is
+used to call any external api functions exported by yajl into libyajl.</dd></dl>
+
+<dl class="exception">
+<dt id="yajl.yajl_common.YajlConfigError">
+<em class="property">exception </em><tt class="descclassname">yajl.yajl_common.</tt><tt class="descname">YajlConfigError</tt><a class="headerlink" href="#yajl.yajl_common.YajlConfigError" title="Permalink to this definition">¶</a></dt>
+<dd>Bases: <a title="yajl.yajl_common.YajlException" class="reference internal" href="#yajl.yajl_common.YajlException"><tt class="xref docutils literal"><span class="pre">yajl.yajl_common.YajlException</span></tt></a></dd></dl>
+
+<dl class="exception">
+<dt id="yajl.yajl_common.YajlError">
+<em class="property">exception </em><tt class="descclassname">yajl.yajl_common.</tt><tt class="descname">YajlError</tt><big>(</big><em>value=''</em><big>)</big><a class="headerlink" href="#yajl.yajl_common.YajlError" title="Permalink to this definition">¶</a></dt>
+<dd>Bases: <a title="yajl.yajl_common.YajlException" class="reference internal" href="#yajl.yajl_common.YajlException"><tt class="xref docutils literal"><span class="pre">yajl.yajl_common.YajlException</span></tt></a></dd></dl>
+
+<dl class="exception">
+<dt id="yajl.yajl_common.YajlException">
+<em class="property">exception </em><tt class="descclassname">yajl.yajl_common.</tt><tt class="descname">YajlException</tt><a class="headerlink" href="#yajl.yajl_common.YajlException" title="Permalink to this definition">¶</a></dt>
+<dd>Bases: <tt class="xref docutils literal"><span class="pre">exceptions.Exception</span></tt></dd></dl>
+
+<dl class="function">
+<dt id="yajl.yajl_common.get_yajl_version">
+<tt class="descclassname">yajl.yajl_common.</tt><tt class="descname">get_yajl_version</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_common.get_yajl_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>To be used internally by yajl-py to fetch yajl&#8217;s version</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">yajl&#8217;s version in the format &#8216;Major.Minor.Micro&#8217;</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="yajl.yajl_common.load_yajl">
+<tt class="descclassname">yajl.yajl_common.</tt><tt class="descname">load_yajl</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_common.load_yajl" title="Permalink to this definition">¶</a></dt>
+<dd><p>To be used internally by yajl-py to preload the yajl shared object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">ctypes.cdll</td>
+</tr>
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">The yajl shared object</td>
+</tr>
+<tr class="field"><th class="field-name">Raises OSError:</th><td class="field-body">when libyajl cannot be loaded</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">yajl</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="yajl_gen.html"
+                                  title="next chapter">yajl.yajl_gen</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/yajl/yajl_common.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="yajl_gen.html" title="yajl.yajl_gen"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="yajl"
+             >previous</a> |</li>
+        <li><a href="../index.html">Yajl-Py v1.0.10 documentation</a> &raquo;</li>
+          <li><a href="index.html" >yajl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Hatem Nassrat.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+    </div>
+  </body>
+</html>

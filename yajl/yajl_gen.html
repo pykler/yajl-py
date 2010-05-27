@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>yajl.yajl_gen &mdash; Yajl-Py v1.0.10 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.10',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Yajl-Py v1.0.10 documentation" href="../index.html" />
+    <link rel="up" title="yajl" href="index.html" />
+    <link rel="next" title="yajl.yajl_parse" href="yajl_parse.html" />
+    <link rel="prev" title="yajl.yajl_common" href="yajl_common.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="yajl_parse.html" title="yajl.yajl_parse"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="yajl_common.html" title="yajl.yajl_common"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Yajl-Py v1.0.10 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">yajl</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-yajl.yajl_gen">
+<h1>yajl.yajl_gen<a class="headerlink" href="#module-yajl.yajl_gen" title="Permalink to this headline">¶</a></h1>
+<p>Code that allows use of api/yajl_gen.h</p>
+<dl class="exception">
+<dt id="yajl.yajl_gen.YajlGenException">
+<em class="property">exception </em><tt class="descclassname">yajl.yajl_gen.</tt><tt class="descname">YajlGenException</tt><big>(</big><em>value=''</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGenException" title="Permalink to this definition">¶</a></dt>
+<dd>Bases: <a title="yajl.yajl_common.YajlError" class="reference external" href="yajl_common.html#yajl.yajl_common.YajlError"><tt class="xref docutils literal"><span class="pre">yajl.yajl_common.YajlError</span></tt></a></dd></dl>
+
+<dl class="class">
+<dt id="yajl.yajl_gen.YajlGen">
+<em class="property">class </em><tt class="descclassname">yajl.yajl_gen.</tt><tt class="descname">YajlGen</tt><big>(</big><em>beautify=True</em>, <em>indent='  '</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<p>Yajl Generator - json formatting using yajl_gen</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>beautify</em> (bool) &#8211; To pretty print json (or not)</li>
+<li><em>indent</em> (string) &#8211; only valid when beautify=True</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="yajl.yajl_gen.YajlGen.g">
+<tt class="descname">g</tt><a class="headerlink" href="#yajl.yajl_gen.YajlGen.g" title="Permalink to this definition">¶</a></dt>
+<dd>instance of <tt class="xref docutils literal"><span class="pre">yajl_gen</span></tt> returned by
+<tt class="xref docutils literal"><span class="pre">yajl.yajl_gen_alloc()</span></tt>.
+This should not be used directly.</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen._assert_retval">
+<tt class="descname">_assert_retval</tt><big>(</big><em>retval</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen._assert_retval" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>retval</em> (int) &#8211; yajl_gen_status return code</td>
+</tr>
+<tr class="field"><th class="field-name" colspan="2">Raises <a title="yajl.yajl_gen.YajlGenException" class="reference internal" href="#yajl.yajl_gen.YajlGenException">YajlGenException</a>:</th></tr>
+<tr><td>&nbsp;</td><td class="field-body">When retval is != yajl_gen_status_ok</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen._dispatch">
+<tt class="descname">_dispatch</tt><big>(</big><em>name</em>, <em>*args</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen._dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><em>name</em> (string) &#8211; yajl func <tt class="docutils literal"><span class="pre">name</span></tt> to dispatch to</li>
+<li><em>args</em> (list or tuple) &#8211; arguments to pass to the dispatchee</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_array_close">
+<tt class="descname">yajl_gen_array_close</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_array_close" title="Permalink to this definition">¶</a></dt>
+<dd>indicate json array close</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_array_open">
+<tt class="descname">yajl_gen_array_open</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_array_open" title="Permalink to this definition">¶</a></dt>
+<dd>indicate json array begin</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_bool">
+<tt class="descname">yajl_gen_bool</tt><big>(</big><em>b</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_bool" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>b</em> (bool) &#8211; flag to be jsonified</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_double">
+<tt class="descname">yajl_gen_double</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_double" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>n</em> (float) &#8211; number to be jsonified</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_get_buf">
+<tt class="descname">yajl_gen_get_buf</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_get_buf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Returns:</th><td class="field-body">Formatted JSON</td>
+</tr>
+<tr class="field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>This function may be called in a streaming fashion, i.e. you can call
+this method many times, it will retrieve what was generated since the
+last call.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_integer">
+<tt class="descname">yajl_gen_integer</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_integer" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>n</em> (int) &#8211; number to be jsonified</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_map_close">
+<tt class="descname">yajl_gen_map_close</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_map_close" title="Permalink to this definition">¶</a></dt>
+<dd>indicate json map close</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_map_open">
+<tt class="descname">yajl_gen_map_open</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_map_open" title="Permalink to this definition">¶</a></dt>
+<dd>indicate json map begin</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_null">
+<tt class="descname">yajl_gen_null</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_null" title="Permalink to this definition">¶</a></dt>
+<dd>Generate json value <tt class="docutils literal"><span class="pre">null</span></tt></dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_number">
+<tt class="descname">yajl_gen_number</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_number" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>s</em> (string) &#8211; number to be jsonified</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong> to print floats or ints use <a title="yajl.yajl_gen.YajlGen.yajl_gen_double" class="reference internal" href="#yajl.yajl_gen.YajlGen.yajl_gen_double"><tt class="xref docutils literal"><span class="pre">yajl_gen_double()</span></tt></a>
+or <a title="yajl.yajl_gen.YajlGen.yajl_gen_integer" class="reference internal" href="#yajl.yajl_gen.YajlGen.yajl_gen_integer"><tt class="xref docutils literal"><span class="pre">yajl_gen_integer()</span></tt></a> respectively.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="yajl.yajl_gen.YajlGen.yajl_gen_string">
+<tt class="descname">yajl_gen_string</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_string" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameter:</th><td class="field-body"><em>s</em> (string) &#8211; string to be jsonified</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="yajl.yajl_gen.yajl_gen_config">
+<em class="property">class </em><tt class="descclassname">yajl.yajl_gen.</tt><tt class="descname">yajl_gen_config</tt><a class="headerlink" href="#yajl.yajl_gen.yajl_gen_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">_ctypes.Structure</span></tt></p>
+<dl class="attribute">
+<dt id="yajl.yajl_gen.yajl_gen_config.beautify">
+<tt class="descname">beautify</tt><a class="headerlink" href="#yajl.yajl_gen.yajl_gen_config.beautify" title="Permalink to this definition">¶</a></dt>
+<dd>Structure/Union member</dd></dl>
+
+<dl class="attribute">
+<dt id="yajl.yajl_gen.yajl_gen_config.indentString">
+<tt class="descname">indentString</tt><a class="headerlink" href="#yajl.yajl_gen.yajl_gen_config.indentString" title="Permalink to this definition">¶</a></dt>
+<dd>Structure/Union member</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="yajl_common.html"
+                                  title="previous chapter">yajl.yajl_common</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="yajl_parse.html"
+                                  title="next chapter">yajl.yajl_parse</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/yajl/yajl_gen.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="../search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="yajl_parse.html" title="yajl.yajl_parse"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="yajl_common.html" title="yajl.yajl_common"
+             >previous</a> |</li>
+        <li><a href="../index.html">Yajl-Py v1.0.10 documentation</a> &raquo;</li>
+          <li><a href="index.html" >yajl</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Hatem Nassrat.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
+    </div>
+  </body>
+</html>

@@ -1,92 +1,202 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to Yajl-Py’s documentation! &mdash; Yajl-Py v1.0.10 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '1.0.10',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Yajl-Py v1.0.10 documentation" href="#" />
+    <link rel="next" title="yajl" href="yajl/index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="yajl/index.html" title="yajl"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Yajl-Py v1.0.10 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
 
-	<title>pykler/yajl-py @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #afcfc3;
-		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #50303c; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #50303c; }
-    h3 { text-align: center; color: #50303c; }
-    a { color: #50303c; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
-</head>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-yajl-py-s-documentation">
+<h1>Welcome to Yajl-Py&#8217;s documentation!<a class="headerlink" href="#welcome-to-yajl-py-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://github.com/pykler/yajl-py">yajl-py</a> is a pure python wrapper
+to the <a class="reference external" href="http://lloyd.github.com/yajl/">yajl</a> C Library.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>A library that allows sax-like parsing of JSON. It is a thin wrapper
+around the yajl C library that aims to enable all yajl&#8217;s features. It
+uses ctypes to interface with yajl&#8217;s routines, and thus allows for using
+any yajl routine even if it isn&#8217;t explicitly wrapped in yajl-py. yajl-py
+aims to be as pythonic as possible and still be consistent with the
+general style of yajl itself. This can be seen by comparing
+<a class="reference internal" href="#yajl-py-examples"><em>yajl-py examples</em></a> with the
+<a class="reference external" href="http://lloyd.github.com/yajl/">examples of yajl</a> itself.</p>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To install the latest version of yajl-py, run:</p>
+<div class="highlight-python"><pre>easy_install yajl-py</pre>
+</div>
+<p>For the development version you may visit
+<a class="reference external" href="http://github.com/pykler/yajl-py">yajl-py at github</a>.</p>
+</div>
+<div class="section" id="alternatives">
+<h2>Alternatives<a class="headerlink" href="#alternatives" title="Permalink to this headline">¶</a></h2>
+<p>Another python library that wraps yajl for python is
+<a class="reference external" href="http://github.com/rtyler/py-yajl/">py-yajl</a>. py-yajl creates an
+alternative to the built in json.loads and json.dumps using yajl. On the
+other hand, yajl-py wraps only yajl&#8217;s functionality giving the user the
+flexibility of defining their callbacks and thus benifiting from yajl&#8217;s
+stream parsing.</p>
+</div>
+<div class="section" id="versioning">
+<span id="yajl-py-examples"></span><h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
+<p>To maintain compatibility, yajl-py version numbering follows yajl&#8217;s version
+numbers, where releases of yajl-py are fully compatible with the same numbered
+releases of yajl. This document reflects yajl-py version 1.0.10.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://github.com/pykler/yajl-py/tree/master/examples/">Examples of how to use yajl-py</a> quickly show
+how much slimmer the python versions are than their C counterparts. Each
+of the examples in that directory perform the same actions as the C
+versions. The code is layed out in a similar fashion to the C code such
+that one can follow the logic.</p>
+<div class="section" id="quick-example">
+<h3>Quick Example<a class="headerlink" href="#quick-example" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="documentaion">
+<h2>Documentaion<a class="headerlink" href="#documentaion" title="Permalink to this headline">¶</a></h2>
+<p>yajl-py internally is divided in a similar way as yajl&#8217;s C api. However,
+for flexibility all the classes, methods and structures implemented in
+each of the submodules is directly available under the main yajl module.
+Therefore using <tt class="docutils literal"><span class="pre">yajl.yajl_parse.YajlParser</span></tt> is the same as using
+<tt class="docutils literal"><span class="pre">yajl.YajlParser</span></tt> and similarly <tt class="docutils literal"><span class="pre">yajl.yajl_gen.YajlGen</span></tt> is the same as
+using <tt class="docutils literal"><span class="pre">yajl.YajlGen</span></tt>. The shared object (dll in windows, and dylib for
+bsd/MacOSX) is accessible as <tt class="docutils literal"><span class="pre">yajl.yajl_common.yajl</span></tt> or simply
+<tt class="docutils literal"><span class="pre">yajl.yajl</span></tt>. Generally, you will not need to interact with the shared
+object directly, if this is the case then it is a short-comming of
+yajl-py.</p>
+<p>The following links lead to documentation generated from the yajl-py
+docstrings:</p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="yajl/index.html">yajl</a><ul>
+<li class="toctree-l2"><a class="reference external" href="yajl/index.html#sub-modules">Sub-Modules</a><ul>
+<li class="toctree-l3"><a class="reference external" href="yajl/yajl_common.html">yajl.yajl_common</a></li>
+<li class="toctree-l3"><a class="reference external" href="yajl/yajl_gen.html">yajl.yajl_gen</a></li>
+<li class="toctree-l3"><a class="reference external" href="yajl/yajl_parse.html">yajl.yajl_parse</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference external" href="modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference external" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
 
-<body>
-  <a href="http://github.com/pykler/yajl-py"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-  <div id="container">
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="#">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Welcome to Yajl-Py&#8217;s documentation!</a><ul>
+<li><a class="reference external" href="#description">Description</a></li>
+<li><a class="reference external" href="#installation">Installation</a></li>
+<li><a class="reference external" href="#alternatives">Alternatives</a></li>
+<li><a class="reference external" href="#versioning">Versioning</a></li>
+<li><a class="reference external" href="#examples">Examples</a><ul>
+<li><a class="reference external" href="#quick-example">Quick Example</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#documentaion">Documentaion</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference external" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
 
-    <div class="download">
-      <a href="http://github.com/pykler/yajl-py/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/pykler/yajl-py/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="yajl/index.html"
+                                  title="next chapter">yajl</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/index.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
     </div>
-
-    <h1><a href="http://github.com/pykler/yajl-py">yajl-py</a>
-      <span class="small">by <a href="http://github.com/pykler">pykler</a></span></h1>
-
-    <div class="description">
-      Pure Python wrapper to the Yajl C Library
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modindex.html" title="Global Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="yajl/index.html" title="yajl"
+             >next</a> |</li>
+        <li><a href="#">Yajl-Py v1.0.10 documentation</a> &raquo;</li> 
+      </ul>
     </div>
-
-    <p>This is a python wrapper using the python standard library ctypes. Yajl provides a way of doing stream parsing (sax-like for lack of a better term) parsing of JSON by firing callbacks whenever a JSON unit is parsed.
-
-The main advantage of using Yajl from python using Yajl-py is to be able to process parts of the JSON document rather than having to place the entire parsed JSON document in memory as is the traditional usecase with the builtin python json library.
-
-The usecase for using Yajl-py + Yajl over the builtin python json library for JSON is the same usecase for using SAX over Minidom when parsing XML.</p><h2>Dependencies</h2>
-<p>Python (2.6, not tested with 3+ series)
-Yajl (http://lloyd.github.com/yajl/)</p>
-<h2>Install</h2>
-<p>Clone this repo: git clone git://github.com/pykler/yajl-py.git
-Install yajl-py: easy_install yajl-py</p>
-<h2>License</h2>
-<p>PSF Licencse (http://www.python.org/download/releases/2.6.2/license)</p>
-<h2>Authors</h2>
-<p>Hatem Nassrat (hnassrat@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Hatem Nassrat (hnassrat@gmail.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/pykler/yajl-py/zipball/master">zip</a> or
-      <a href="http://github.com/pykler/yajl-py/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/pykler/yajl-py</pre>
-    </p>
-
     <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/pykler/yajl-py">pykler/yajl-py</a>
+      &copy; Copyright 2010, Hatem Nassrat.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.4.
     </div>
-
-  </div>
-
-  
-</body>
+  </body>
 </html>

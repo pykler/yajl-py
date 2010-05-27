@@ -47,7 +47,7 @@ class YajlGen(object):
         self.g = yajl.yajl_gen_alloc(byref(conf), None)
     def __del__(self):
         yajl.yajl_gen_free(self.g)
-    def _assert_retval(retval):
+    def _assert_retval(self, retval):
         '''
         :param retval: yajl_gen_status return code
         :type retval: int
@@ -85,25 +85,25 @@ class YajlGen(object):
         )
     def yajl_gen_null(self):
         ''' Generate json value ``null`` '''
-        self._dispatch('yajl_gen_null', self.g)
+        self._dispatch('yajl_gen_null')
     def yajl_gen_bool(self, b):
         ''' 
         :param b: flag to be jsonified
         :type b: bool
         '''
-        self._dispatch('yajl_gen_bool', self.g, b)
+        self._dispatch('yajl_gen_bool', b)
     def yajl_gen_integer(self, n):
         ''' 
         :param n: number to be jsonified
         :type n: int
         '''
-        self._dispatch('yajl_gen_integer', self.g, n)
+        self._dispatch('yajl_gen_integer', c_long(n))
     def yajl_gen_double(self, n):
         ''' 
         :param n: number to be jsonified
         :type n: float
         '''
-        self._dispatch('yajl_gen_double', self.g, n)
+        self._dispatch('yajl_gen_double', c_double(n))
     def yajl_gen_number(self, s):
         '''
         :param s: number to be jsonified
@@ -112,22 +112,22 @@ class YajlGen(object):
         **Note** to print floats or ints use :meth:`yajl_gen_double`
         or :meth:`yajl_gen_integer` respectively.
         '''
-        self._dispatch('yajl_gen_number', self.g, c_char_p(s), len(s))
+        self._dispatch('yajl_gen_number', c_char_p(s), len(s))
     def yajl_gen_string(self, s):
         ''' 
         :param s: string to be jsonified
         :type s: string
         '''
-        self._dispatch('yajl_gen_string', self.g, c_char_p(s), len(s))
+        self._dispatch('yajl_gen_string', c_char_p(s), len(s))
     def yajl_gen_map_open(self):
         ''' indicate json map begin '''
-        self._dispatch('yajl_gen_map_open', self.g)
+        self._dispatch('yajl_gen_map_open')
     def yajl_gen_map_close(self):
         ''' indicate json map close '''
-        self._dispatch('yajl_gen_map_close', self.g)
+        self._dispatch('yajl_gen_map_close')
     def yajl_gen_array_open(self):
         ''' indicate json array begin '''
-        self._dispatch('yajl_gen_array_open', self.g)
+        self._dispatch('yajl_gen_array_open')
     def yajl_gen_array_close(self):
         ''' indicate json array close '''
-        self._dispatch('yajl_gen_array_close', self.g)
+        self._dispatch('yajl_gen_array_close')

@@ -73,6 +73,10 @@ class YajlContentHandler(object):
     the :meth:`yajl_integer` & :meth:`yajl_double` callbacks will be ignored.
     For this reason none of these three methods are enforced by the Abstract
     Base Class
+
+    **Note** all methods must accept a param :obj:`ctx` as the first argument,
+    this is a yajl feature that is implemented in yajl-py but not very useful
+    in python.  see :meth:`YajlParser.parse` for more info on :obj:`ctx`.
     '''
     __metaclass__ = ABCMeta
     @abstractmethod
@@ -121,10 +125,16 @@ class YajlParser(object):
     '''
     def __init__(self, content_handler=None, allow_comments=True, check_utf8=True, buf_siz=65536):
         '''
-        `content_handler` an instance of a subclass of YajlContentHandler
-        `allow_comments` specifies whether comments are allowed in the document
-        `check_utf8` specifies whether utf8 charachters are allowed in the document
-        `buf_siz` the number of bytes to process from the input stream at a time
+        :type content_handler: :class:`YajlContentHandler`
+        :param content_handler: content handler instance hosting the
+            callbacks that will be called while parsing.
+        :type allow_comments: bool
+        :param allow_comments: if comments are allowed in the document
+        :type check_utf8: bool
+        :param check_utf8: if utf8 charachters are allowed in the document
+        :type buf_siz: int
+        :param buf_siz: number of bytes to process from the input stream
+            at a time (minimum 1)
         '''
         # input validation
         if buf_siz <= 0:
@@ -194,16 +204,13 @@ class YajlParser(object):
     def parse(self, f=sys.stdin, ctx=None):
         '''Function to parse a JSON stream.
 
-        Parameters:
-
-            * `f` - file stream to read from
-            * `ctx` - A ctypes pointer that will be passed to all 
-              callback functions as the first param
-
-        Raises an expception upon error or return value of 0
-        from callback functions. A callback function that
-        returns 0 should set internal variables to denote
-        why they cancelled the parsing.
+        :type f: file
+        :param f: stream to parse JSON from
+        :type ctx: ctypes.POINTER
+        :param ctx: passed to all callback functions as the first param this is
+         a feature of yajl, and not very useful in yajl-py since the context is
+         preserved using the content_handler instance.
+        :raises YajlError: When invalid JSON in input stream found
         '''
         if self.content_handler:
             self.content_handler.parse_start()

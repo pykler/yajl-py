@@ -24,7 +24,8 @@ class MockTestCase(unittest.TestCase):
         unittest.TestCase.tearDown(self)
 
     def mock(self, *args, **kwargs):
-        kwargs['tracker'] = self.tt
+        if 'tracker' not in kwargs:
+            kwargs['tracker'] = self.tt
         return minimock.mock(*args, **kwargs)
 
     def assertSameTrace(self, want):

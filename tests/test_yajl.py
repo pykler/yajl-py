@@ -178,3 +178,73 @@ class YajlPyTests(MockTestCase):
 
     def test_checkYajlPyAndYajlHaveSameVersion(self):
         self.failUnless(yajl.check_yajl_version())
+
+    def test_YajlGen_callsYajlGenFreeWhenDone(self):
+        self.mock('yajl.yajl_gen.byref', tracker=None)
+        self.mock('yajl.yajl.yajl_gen_alloc')
+        self.mock('yajl.yajl.yajl_gen_free')
+        g = yajl.YajlGen()
+        del g
+        self.assertSameTrace(
+            'Called yajl.yajl.yajl_gen_alloc(None, None)\n'
+            'Called yajl.yajl.yajl_gen_free(None)\n'
+        )
+
+    def _yajl_gen_sample(self, g):
+        g.yajl_gen_map_open()
+        g.yajl_gen_string("a")
+        g.yajl_gen_array_open()
+        g.yajl_gen_null()
+        g.yajl_gen_bool(True)
+        g.yajl_gen_integer(1)
+        g.yajl_gen_double(2.2)
+        g.yajl_gen_number(str(3))
+        yield g.yajl_gen_get_buf()
+        g.yajl_gen_string("b")
+        g.yajl_gen_array_close()
+        g.yajl_gen_map_close()
+        yield g.yajl_gen_get_buf()
+
+    def test_YajlGen_streamedOUtput(self):
+        g = yajl.YajlGen(beautify=False)
+        results = list(self._yajl_gen_sample(g))
+        self.failUnlessEqual(',"b"]}', results[1])
+
+    def test_YajlGen_minimizeOUtput(self):
+        g = yajl.YajlGen(beautify=False)
+        results = self._yajl_gen_sample(g)
+        self.failUnlessEqual(
+            '{"a":[null,true,1,2.2,3,"b"]}',
+            ''.join(results))
+
+    def test_YajlGen_beautifyOUtput(self):
+        g = yajl.YajlGen(beautify=True)
+        results = self._yajl_gen_sample(g)
+        self.failUnlessEqual(
+            '{\n'
+            '  "a": [\n'
+            '    null,\n'
+            '    true,\n'
+            '    1,\n'
+            '    2.2,\n'
+            '    3,\n'
+            '    "b"\n'
+            '  ]\n'
+            '}\n',
+            ''.join(results))
+
+    def test_YajlGen_indentOUtput(self):
+        g = yajl.YajlGen(beautify=True, indent="**")
+        results = self._yajl_gen_sample(g)
+        self.failUnlessEqual(
+            '{\n'
+            '**"a": [\n'
+            '****null,\n'
+            '****true,\n'
+            '****1,\n'
+            '****2.2,\n'
+            '****3,\n'
+            '****"b"\n'
+            '**]\n'
+            '}\n',
+            ''.join(results))

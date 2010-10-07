@@ -14,7 +14,7 @@ from yajl_common import *
 from yajl_parse import *
 from yajl_gen import *
 
-__version__ = '1.0.10'
+__version__ = '1.0.11'
 yajl_version = get_yajl_version()
 
 def check_yajl_version():

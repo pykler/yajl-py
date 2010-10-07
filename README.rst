@@ -6,11 +6,15 @@ yajl-py
 ctypes) to the excellent Yajl (Yet Another JSON Library) C
 library.
 
+`yajl` and `yajl-py`, allow for fast stream parsing of JSON
+files, which enables the parsing of large files, that would
+not fit in memory.
+
 Dependencies
 ------------
 
     - python 2.6 (or compatible)
-    - yajl (from http://lloydforge.org/projects/yajl/)
+    - yajl (from http://lloyd.github.com/yajl/)
 
 To run the tests you also require:
 

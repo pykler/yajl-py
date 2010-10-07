@@ -23,7 +23,7 @@ doc: gh-pages
 
 gh-pages: build-doc
 	git co gh-pages
-	rsync -vr ${HTMLDIR}/ ./
+	rsync -vcr ${HTMLDIR}/ ./
 
 build-doc:
 	make -C doc/ clean html

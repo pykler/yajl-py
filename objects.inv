@@ -1,6 +1,6 @@
 # Sphinx inventory version 1
 # Project: Yajl-Py
-# Version: 1.0.10
+# Version: 1.0.11
 yajl.yajl_gen mod yajl/yajl_gen.html
 yajl mod yajl/index.html
 yajl.yajl_parse mod yajl/yajl_parse.html

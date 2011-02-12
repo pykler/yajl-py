@@ -48,3 +48,13 @@ def get_yajl_version():
     return '%s.%s.%s' %tuple(map(int, [v[:-4], v[-4:-2], v[-2:]]))
 
 yajl = load_yajl()
+
+yajl.yajl_alloc.restype = c_void_p
+yajl.yajl_alloc.argtypes = [c_void_p, c_void_p, c_void_p, c_void_p]
+yajl.yajl_free.argtypes = [c_void_p]
+yajl.yajl_parse.restype = c_int
+yajl.yajl_parse.argtypes = [c_void_p, c_char_p, c_int]
+yajl.yajl_parse_complete.restype = c_int
+yajl.yajl_parse_complete.argtypes = [c_void_p]
+yajl.yajl_get_error.restype = c_char_p
+yajl.yajl_get_error.argtypes = [c_void_p, c_int, c_char_p, c_int]

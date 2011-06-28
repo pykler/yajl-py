@@ -45,7 +45,7 @@ class YajlCTests(MockTestCase):
         expected = expected.replace('memory leaks:\t0\n', '')
         self.out.seek(0)
         got = self.out.read()
-        self.failUnlessEqual(expected, got)
+        self.assertEqual(expected, got)
 
     def resetOutput(self):
         self.out.seek(0)

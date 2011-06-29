@@ -53,13 +53,21 @@ class YajlCTests(MockTestCase):
 
 def _make_test(filename, testname):
     def test(self):
-        kwargs = {}
-        if testname.startswith('dc_'):
-            kwargs['allow_comments'] = False
+        config_key = None
+        config = lambda yp: setattr(yp, config_key, True)
+        if testname.startswith('ac_'):
+            config_key = 'allow_comments'
+        if testname.startswith('ag_'):
+            config_key = 'allow_trailing_garbage'
+        if testname.startswith('am_'):
+            config_key = 'allow_multiple_values'
+        if testname.startswith('ap_'):
+            config_key = 'allow_partial_values'
         for buf_siz in range(1, 32):
             # try out a range of buffer_sizes to stress stream parsing
-            kwargs['buf_siz'] = buf_siz
-            parser = yajl.YajlParser(self.content_handler, **kwargs)
+            parser = yajl.YajlParser(self.content_handler, buf_siz=buf_siz)
+            if config_key:
+                config(parser)
             with open(filename) as f:
                 try:
                     parser.parse(f)

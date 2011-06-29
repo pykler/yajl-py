@@ -90,7 +90,7 @@ class YajlParserTests(MockTestCase):
 
     def test_largestNumberAcceptableInIntegerCallback(self):
         good_json = StringIO('[%s]' %(sys.maxint))
-        bad_json = StringIO('[%s]' %(sys.maxint + 1))
+        bad_json = StringIO('[%s]' %(sys.maxint+1))
         self.mock('self.content_handler.yajl_integer')
         parser = yajl.YajlParser(self.content_handler)
         parser.parse(good_json)
@@ -144,13 +144,13 @@ class YajlGenTests(MockTestCase):
     Testing :class:`YajlGen` works as expected
     '''
     def test_YajlGen_callsYajlGenFreeWhenDone(self):
-        self.mock('yajl.yajl_gen.byref', tracker=None)
+        self.mock('yajl.yajl.yajl_gen_config', tracker=None)
         self.mock('yajl.yajl.yajl_gen_alloc')
         self.mock('yajl.yajl.yajl_gen_free')
         g = yajl.YajlGen()
         del g
         self.assertSameTrace(
-            'Called yajl.yajl.yajl_gen_alloc(None, None)\n'
+            'Called yajl.yajl.yajl_gen_alloc(None)\n'
             'Called yajl.yajl.yajl_gen_free(None)\n'
         )
 
@@ -186,19 +186,19 @@ class YajlGenTests(MockTestCase):
         results = self._yajl_gen_sample(g)
         self.assertEqual(
             '{\n'
-            '  "a": [\n'
-            '    null,\n'
-            '    true,\n'
-            '    1,\n'
-            '    -6.5,\n'
-            '    3,\n'
-            '    "b"\n'
-            '  ]\n'
+            '    "a": [\n'
+            '        null,\n'
+            '        true,\n'
+            '        1,\n'
+            '        -6.5,\n'
+            '        3,\n'
+            '        "b"\n'
+            '    ]\n'
             '}\n',
             ''.join(results))
 
     def test_YajlGen_indentOutput(self):
-        g = yajl.YajlGen(beautify=True, indent="\t")
+        g = yajl.YajlGen(beautify=True, indent_string="\t")
         results = self._yajl_gen_sample(g)
         self.assertEqual(
             '{\n'

@@ -13,14 +13,17 @@ yajl_gen_status = {
     4: 'yajl_gen_generation_complete',
     5: 'yajl_gen_invalid_number',
     6: 'yajl_gen_no_buf',
+    7: 'yajl_gen_invalid_string',
 }
 yajl_gen_status_ok = 0
 
-class yajl_gen_config(Structure):
-    _fields_ = [
-        ("beautify", c_uint),
-        ("indentString", c_char_p),
-    ]
+(
+yajl_gen_beautify,
+yajl_gen_indent_string,
+yajl_gen_print_callback,
+yajl_gen_validate_utf8,
+yajl_gen_escape_solidus,
+) = map(c_int, [2**x for x in range(5)])
 
 class YajlGenException(YajlError):
     pass
@@ -30,7 +33,7 @@ class YajlGen(object):
     Yajl Generator - json formatting using yajl_gen
 
     '''
-    def __init__(self, beautify=True, indent="  "):
+    def __init__(self, **kwargs):
         '''
         :param beautify: To pretty print json (or not)
         :type beautify: bool
@@ -43,8 +46,17 @@ class YajlGen(object):
             :cfunc:`yajl.yajl_gen_alloc`.
             This should not be used directly.
         '''
-        conf = yajl_gen_config(beautify, indent)
-        self.g = yajl.yajl_gen_alloc(byref(conf), None)
+        self.g = yajl.yajl_gen_alloc(None)
+        config_map = dict([
+            ('beautify', yajl_gen_beautify),
+            ('indent_string', yajl_gen_indent_string),
+            ('print_callback', yajl_gen_print_callback),
+            ('validate_utf8', yajl_gen_validate_utf8),
+            ('gen_escape_solidus', yajl_gen_escape_solidus),
+        ])
+        for k,v in kwargs.items():
+            yajl.yajl_gen_config(self.g, config_map[k], v)
+
     def __del__(self):
         yajl.yajl_gen_free(self.g)
     def _assert_retval(self, retval):
@@ -97,7 +109,7 @@ class YajlGen(object):
         :param n: number to be jsonified
         :type n: int
         '''
-        self._dispatch('yajl_gen_integer', c_long(n))
+        self._dispatch('yajl_gen_integer', c_longlong(n))
     def yajl_gen_double(self, n):
         ''' 
         :param n: number to be jsonified

@@ -6,17 +6,10 @@ import sys
 from yajl_common import *
 from abc import ABCMeta, abstractmethod
 
-# parser config
-class yajl_parser_config(Structure):
-    _fields_ = [
-        ("allowComments", c_uint),
-        ("checkUTF8", c_uint)
-    ]
-
 # Callback Functions
 YAJL_NULL = CFUNCTYPE(c_int, c_void_p)
 YAJL_BOOL = CFUNCTYPE(c_int, c_void_p, c_int)
-YAJL_INT  = CFUNCTYPE(c_int, c_void_p, c_long)
+YAJL_INT  = CFUNCTYPE(c_int, c_void_p, c_longlong)
 YAJL_DBL  = CFUNCTYPE(c_int, c_void_p, c_double)
 YAJL_NUM  = CFUNCTYPE(c_int, c_void_p, POINTER(c_ubyte), c_uint)
 YAJL_STR  = CFUNCTYPE(c_int, c_void_p, POINTER(c_ubyte), c_uint)
@@ -40,13 +33,21 @@ class yajl_callbacks(Structure):
         ("yajl_end_array",      YAJL_EARR),
     ]
 
+# yajl option
+(
+yajl_allow_comments,
+yajl_dont_validate_strings,
+yajl_allow_trailing_garbage,
+yajl_allow_multiple_values,
+yajl_allow_partial_values
+) = map(c_int, [2**x for x in range(5)])
+
 # yajl_status
 (
 yajl_status_ok,
 yajl_status_client_canceled,
-yajl_status_insufficient_data,
 yajl_status_error
-) = map(c_int, range(4))
+) = map(c_int, range(3))
 
 class YajlParseCancelled(YajlError):
     def __init__(self):
@@ -61,13 +62,13 @@ class YajlContentHandler(object):
     Note about handling of numbers (from yajl docs):
 
       yajl will only convert numbers that can be represented in a double
-      or a long int.  All other numbers will be passed to the client
+      or a long long int.  All other numbers will be passed to the client
       in string form using the yajl_number callback.  Furthermore, if
       yajl_number is not NULL, it will always be used to return numbers,
       that is yajl_integer and yajl_double will be ignored. If
       yajl_number is NULL but one of yajl_integer or yajl_double are
       defined, parsing of a number larger than is representable
-      in a double or long int will result in a parse error.
+      in a double or long long int will result in a parse error.
 
     Due to the above, implementing :meth:`yajl_number` takes prescedence and
     the :meth:`yajl_integer` & :meth:`yajl_double` callbacks will be ignored.
@@ -116,25 +117,26 @@ class YajlContentHandler(object):
         ''' Called before each stream is parsed '''
     def parse_buf(self):
         ''' Called when a complete buffer has been parsed from the stream '''
-    def parse_complete(self):
+    def complete_parse(self):
         ''' Called when the parsing of the stream has finished '''
 
 class YajlParser(object):
     '''
     A class that utilizes the Yajl C Library
     '''
-    def __init__(self, content_handler=None, allow_comments=True, check_utf8=True, buf_siz=65536):
+    def __init__(self, content_handler=None, buf_siz=65536, **kwargs):
         '''
         :type content_handler: :class:`YajlContentHandler`
         :param content_handler: content handler instance hosting the
             callbacks that will be called while parsing.
-        :type allow_comments: bool
-        :param allow_comments: if comments are allowed in the document
-        :type check_utf8: bool
-        :param check_utf8: if utf8 charachters are allowed in the document
         :type buf_siz: int
         :param buf_siz: number of bytes to process from the input stream
             at a time (minimum 1)
+
+        To configure the parser you need to set attributes. Attribute
+        names are similar to that of yajl names less the "yajl_" prefix,
+        for example: 
+            to enable yajl_allow_comments, set self.allow_comments=True 
         '''
         # input validation
         if buf_siz <= 0:
@@ -198,8 +200,20 @@ class YajlParser(object):
 
         # set self's vars
         self.buf_siz = buf_siz
-        self.cfg = yajl_parser_config(allow_comments, check_utf8)
         self.content_handler = content_handler
+
+    def yajl_config(self, hand):
+        for k,v in [
+            (yajl_allow_comments, 'allow_comments'),
+            (yajl_dont_validate_strings, 'dont_validate_strings'),
+            (yajl_allow_comments, 'allow_comments'),
+            (yajl_dont_validate_strings, 'dont_validate_strings'),
+            (yajl_allow_trailing_garbage, 'allow_trailing_garbage'),
+            (yajl_allow_multiple_values, 'allow_multiple_values'),
+            (yajl_allow_partial_values, 'allow_partial_values'),
+        ]:
+            if hasattr(self, v):
+                yajl.yajl_config(hand, k, getattr(self, v))
 
     def parse(self, f=sys.stdin, ctx=None):
         '''Function to parse a JSON stream.
@@ -214,18 +228,18 @@ class YajlParser(object):
         '''
         if self.content_handler:
             self.content_handler.parse_start()
-        hand = yajl.yajl_alloc(self.callbacks, byref(self.cfg), None, ctx)
+        hand = yajl.yajl_alloc(self.callbacks, None, ctx)
+        self.yajl_config(hand)
         try:
             while 1:
                 fileData = f.read(self.buf_siz)
                 if not fileData:
-                    stat = yajl.yajl_parse_complete(hand)
+                    stat = yajl.yajl_complete_parse(hand)
                 else:
                     stat = yajl.yajl_parse(hand, fileData, len(fileData))
                 if self.content_handler:
                     self.content_handler.parse_buf()
-                if  stat not in (yajl_status_ok.value,
-                        yajl_status_insufficient_data.value):
+                if  stat != yajl_status_ok.value:
                     if stat == yajl_status_client_canceled.value:
                         # it means we have an exception
                         if self._exc_info:
@@ -240,7 +254,7 @@ class YajlParser(object):
                         raise YajlError(error)
                 if not fileData:
                     if self.content_handler:
-                        self.content_handler.parse_complete()
+                        self.content_handler.complete_parse()
                     break
         finally:
             yajl.yajl_free(hand)

@@ -15,12 +15,12 @@ class ReformatContentHandler(YajlContentHandler):
     '''
     Content handler to reformat a json file using yajl_gen
     '''
-    def __init__(self, beautify=True, indent="  "):
+    def __init__(self, beautify=True, indent_string="  "):
         self.out = sys.stdout
         self.beautify = beautify
-        self.indent = indent
+        self.indent_string = indent_string
     def parse_start(self):
-        self.g = YajlGen(beautify=self.beautify, indent=self.indent)
+        self.g = YajlGen(beautify=self.beautify, indent_string=self.indent_string)
     def parse_buf(self):
         self.out.write(self.g.yajl_gen_get_buf())
     def parse_complete(self):
@@ -54,12 +54,13 @@ def main():
         dest="beautify", action="store_false", default=True,
         help="minimize json rather than beautify (default)")
     opt_parser.add_option("-u",
-        dest="check_utf8", action='store_false', default=True,
+        dest="dont_validate_strings", action='store_true', default=False,
         help="allow invalid UTF8 inside strings during parsing")
     (options, args) = opt_parser.parse_args()
-    yajl_parser = YajlParser(
-        ReformatContentHandler(beautify=options.beautify),
-        check_utf8=options.check_utf8)
+    ch = ReformatContentHandler(beautify=options.beautify)
+    yajl_parser = YajlParser(ch)
+    yajl_parser.allow_comments = True # let's allow comments by default
+    yajl_parser.dont_validate_strings = options.dont_validate_strings
     yajl_parser.parse()
 
 if __name__ == "__main__":

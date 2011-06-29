@@ -22,12 +22,12 @@ def main():
         dest="allow_comments", action="store_true", default=False,
         help="allow comments")
     opt_parser.add_option("-u",
-        dest="check_utf8", action='store_false', default=True,
+        dest="dont_validate_strings", action='store_true', default=False,
         help="allow invalid utf8 inside strings")
     (options, args) = opt_parser.parse_args()
-    yajl_parser = YajlParser(
-        allow_comments=options.allow_comments,
-        check_utf8=options.check_utf8)
+    yajl_parser = YajlParser()
+    yajl_parser.allow_comments = options.allow_comments
+    yajl_parser.dont_validate_strings = options.dont_validate_strings
     retval = 0
     try:
         yajl_parser.parse()

@@ -29,7 +29,8 @@ def load_yajl():
     :returns: The yajl shared object
     :raises OSError: when libyajl cannot be loaded
     '''
-    for yajlso in 'libyajl.so', 'libyajl.dylib':
+    for ftype in '', '.so', '.dylib':
+        yajlso = 'libyajl%s' %(ftype)
         try:
             return cdll.LoadLibrary(yajlso)
         except OSError:
@@ -50,11 +51,15 @@ def get_yajl_version():
 yajl = load_yajl()
 
 yajl.yajl_alloc.restype = c_void_p
-yajl.yajl_alloc.argtypes = [c_void_p, c_void_p, c_void_p, c_void_p]
+yajl.yajl_alloc.argtypes = [c_void_p, c_void_p, c_void_p]
+yajl.yajl_config.restype = c_int
+# yajl.yajl_config.argtypes = [c_void_p, c_int, ...]
 yajl.yajl_free.argtypes = [c_void_p]
 yajl.yajl_parse.restype = c_int
-yajl.yajl_parse.argtypes = [c_void_p, c_char_p, c_int]
-yajl.yajl_parse_complete.restype = c_int
-yajl.yajl_parse_complete.argtypes = [c_void_p]
+yajl.yajl_parse.argtypes = [c_void_p, c_char_p, c_size_t]
+yajl.yajl_complete_parse.restype = c_int
+yajl.yajl_complete_parse.argtypes = [c_void_p]
 yajl.yajl_get_error.restype = c_char_p
-yajl.yajl_get_error.argtypes = [c_void_p, c_int, c_char_p, c_int]
+yajl.yajl_get_error.argtypes = [c_void_p, c_int, c_char_p, c_size_t]
+yajl.yajl_get_bytes_consumed.restype = c_uint
+yajl.yajl_get_bytes_consumed.argtypes = [c_void_p, c_char_p]

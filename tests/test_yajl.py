@@ -1,4 +1,7 @@
-from yajl_test_lib import *
+from yajl_test_lib import yajl
+from minimocktest import MockTestCase
+from StringIO import StringIO
+import sys
 
 class BaseContentHandler(yajl.YajlContentHandler):
     def yajl_null(self, ctx):

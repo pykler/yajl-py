@@ -241,7 +241,7 @@ class YajlCommonTests(MockTestCase):
 
     def test_check_yajl_version_warnsOnlyWhenMismatchedVersions(self):
         import warnings
-        self.mock('warnings.warn', [locals()])
+        self.mock('warnings.warn')
         self.mock('yajl.__version__', mock_obj='1.1.1')
         self.mock('yajl.yajl_version', mock_obj='1.1.1')
         self.assertTrue(yajl.check_yajl_version())

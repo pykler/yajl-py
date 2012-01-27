@@ -1,4 +1,7 @@
-from yajl_test_lib import * 
+from yajl_test_lib import yajl, BASEPATH 
+from minimocktest import MockTestCase
+from StringIO import StringIO
+import os
 import difflib
 
 class YajlCTestContentHandler(yajl.YajlContentHandler):

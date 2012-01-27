@@ -20,6 +20,7 @@ To run the tests you also require:
 
     - make (to run `make test`)
     - nose (debian package == `python-nose`)
+    - MiniMockTest (`pip install minimocktest`)
 
 Install
 -------

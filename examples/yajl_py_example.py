@@ -37,6 +37,7 @@ class ContentHandler(YajlContentHandler):
 
 def main(args):
     parser = YajlParser(ContentHandler())
+    parser.allow_multiple_values = True
     if args:
         for fn in args:
             f = open(fn)

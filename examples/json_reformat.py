@@ -60,6 +60,7 @@ def main():
     ch = ReformatContentHandler(beautify=options.beautify)
     yajl_parser = YajlParser(ch)
     yajl_parser.allow_comments = True # let's allow comments by default
+    yajl_parser.allow_multiple_values = True
     yajl_parser.dont_validate_strings = options.dont_validate_strings
     yajl_parser.parse()
 

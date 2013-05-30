@@ -1,25 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>yajl.yajl_parse &mdash; Yajl-Py v1.0.11 documentation</title>
+    <title>yajl.yajl_parse &mdash; Yajl-Py 1.0.11 documentation</title>
+    
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
         VERSION:     '1.0.11',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="Yajl-Py v1.0.11 documentation" href="../index.html" />
+    <link rel="top" title="Yajl-Py 1.0.11 documentation" href="../index.html" />
     <link rel="up" title="yajl" href="index.html" />
     <link rel="prev" title="yajl.yajl_gen" href="yajl_gen.html" />
      
@@ -43,12 +47,12 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../modindex.html" title="Global Module Index"
-             accesskey="M">modules</a> |</li>
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="yajl_gen.html" title="yajl.yajl_gen"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Yajl-Py v1.0.11 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Yajl-Py 1.0.11 documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">yajl</a> &raquo;</li> 
       </ul>
     </div>  
@@ -59,51 +63,55 @@
           <div class="body">
             
   <div class="section" id="module-yajl.yajl_parse">
-<h1>yajl.yajl_parse<a class="headerlink" href="#module-yajl.yajl_parse" title="Permalink to this headline">¶</a></h1>
+<span id="yajl-yajl-parse"></span><h1>yajl.yajl_parse<a class="headerlink" href="#module-yajl.yajl_parse" title="Permalink to this headline">¶</a></h1>
 <p>Code that allows use of api/yajl_parse.h</p>
 <dl class="exception">
 <dt id="yajl.yajl_parse.YajlParseCancelled">
 <em class="property">exception </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">YajlParseCancelled</tt><a class="headerlink" href="#yajl.yajl_parse.YajlParseCancelled" title="Permalink to this definition">¶</a></dt>
-<dd>Bases: <a title="yajl.yajl_common.YajlError" class="reference external" href="yajl_common.html#yajl.yajl_common.YajlError"><tt class="xref docutils literal"><span class="pre">yajl.yajl_common.YajlError</span></tt></a></dd></dl>
+<dd><p>Bases: <a class="reference internal" href="yajl_common.html#yajl.yajl_common.YajlError" title="yajl.yajl_common.YajlError"><tt class="xref py py-class docutils literal"><span class="pre">yajl.yajl_common.YajlError</span></tt></a></p>
+</dd></dl>
 
 <dl class="class">
 <dt id="yajl.yajl_parse.YajlContentHandler">
 <em class="property">class </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">YajlContentHandler</tt><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Subclass this Abstract Base Class and implement the callback routines that
-will be called by the <a title="yajl.yajl_parse.YajlParser" class="reference internal" href="#yajl.yajl_parse.YajlParser"><tt class="xref docutils literal"><span class="pre">YajlParser</span></tt></a> instance that you will pass an
+will be called by the <a class="reference internal" href="#yajl.yajl_parse.YajlParser" title="yajl.yajl_parse.YajlParser"><tt class="xref py py-class docutils literal"><span class="pre">YajlParser</span></tt></a> instance that you will pass an
 instance of the subclass (phew! did you get that?) to.</p>
 <p>Note about handling of numbers (from yajl docs):</p>
 <blockquote>
-yajl will only convert numbers that can be represented in a double
-or a long int.  All other numbers will be passed to the client
+<div>yajl will only convert numbers that can be represented in a double
+or a long long int.  All other numbers will be passed to the client
 in string form using the yajl_number callback.  Furthermore, if
 yajl_number is not NULL, it will always be used to return numbers,
 that is yajl_integer and yajl_double will be ignored. If
 yajl_number is NULL but one of yajl_integer or yajl_double are
 defined, parsing of a number larger than is representable
-in a double or long int will result in a parse error.</blockquote>
-<p>Due to the above, implementing <tt class="xref docutils literal"><span class="pre">yajl_number()</span></tt> takes prescedence and
-the <tt class="xref docutils literal"><span class="pre">yajl_integer()</span></tt> &amp; <tt class="xref docutils literal"><span class="pre">yajl_double()</span></tt> callbacks will be ignored.
+in a double or long long int will result in a parse error.</div></blockquote>
+<p>Due to the above, implementing <tt class="xref py py-meth docutils literal"><span class="pre">yajl_number()</span></tt> takes prescedence and
+the <tt class="xref py py-meth docutils literal"><span class="pre">yajl_integer()</span></tt> &amp; <tt class="xref py py-meth docutils literal"><span class="pre">yajl_double()</span></tt> callbacks will be ignored.
 For this reason none of these three methods are enforced by the Abstract
 Base Class</p>
-<p><strong>Note</strong> all methods must accept a param <tt class="xref docutils literal"><span class="pre">ctx</span></tt> as the first argument,
+<p><strong>Note</strong> all methods must accept a param <tt class="xref py py-obj docutils literal"><span class="pre">ctx</span></tt> as the first argument,
 this is a yajl feature that is implemented in yajl-py but not very useful
-in python.  see <a title="yajl.yajl_parse.YajlParser.parse" class="reference internal" href="#yajl.yajl_parse.YajlParser.parse"><tt class="xref docutils literal"><span class="pre">YajlParser.parse()</span></tt></a> for more info on <tt class="xref docutils literal"><span class="pre">ctx</span></tt>.</p>
+in python.  see <a class="reference internal" href="#yajl.yajl_parse.YajlParser.parse" title="yajl.yajl_parse.YajlParser.parse"><tt class="xref py py-meth docutils literal"><span class="pre">YajlParser.parse()</span></tt></a> for more info on <tt class="xref py py-obj docutils literal"><span class="pre">ctx</span></tt>.</p>
+<dl class="method">
+<dt id="yajl.yajl_parse.YajlContentHandler.complete_parse">
+<tt class="descname">complete_parse</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.complete_parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the parsing of the stream has finished</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.parse_buf">
 <tt class="descname">parse_buf</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.parse_buf" title="Permalink to this definition">¶</a></dt>
-<dd>Called when a complete buffer has been parsed from the stream</dd></dl>
-
-<dl class="method">
-<dt id="yajl.yajl_parse.YajlContentHandler.parse_complete">
-<tt class="descname">parse_complete</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.parse_complete" title="Permalink to this definition">¶</a></dt>
-<dd>Called when the parsing of the stream has finished</dd></dl>
+<dd><p>Called when a complete buffer has been parsed from the stream</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.parse_start">
 <tt class="descname">parse_start</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.parse_start" title="Permalink to this definition">¶</a></dt>
-<dd>Called before each stream is parsed</dd></dl>
+<dd><p>Called before each stream is parsed</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.yajl_boolean">
@@ -145,129 +153,157 @@ in python.  see <a title="yajl.yajl_parse.YajlParser.parse" class="reference int
 <tt class="descname">yajl_string</tt><big>(</big><em>ctx</em>, <em>stringVal</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_string" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="attribute">
+<dt id="yajl.yajl_parse.YajlContentHandler._abc_cache">
+<tt class="descname">_abc_cache</tt><em class="property"> = &lt;_weakrefset.WeakSet object at 0x24244d0&gt;</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_cache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="yajl.yajl_parse.YajlContentHandler._abc_negative_cache">
+<tt class="descname">_abc_negative_cache</tt><em class="property"> = &lt;_weakrefset.WeakSet object at 0x2424550&gt;</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_negative_cache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="yajl.yajl_parse.YajlContentHandler._abc_negative_cache_version">
+<tt class="descname">_abc_negative_cache_version</tt><em class="property"> = 20</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_negative_cache_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="yajl.yajl_parse.YajlContentHandler._abc_registry">
+<tt class="descname">_abc_registry</tt><em class="property"> = &lt;_weakrefset.WeakSet object at 0x2424410&gt;</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_registry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="yajl.yajl_parse.YajlParser">
-<em class="property">class </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">YajlParser</tt><big>(</big><em>content_handler=None</em>, <em>allow_comments=True</em>, <em>check_utf8=True</em>, <em>buf_siz=65536</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">object</span></tt></p>
+<em class="property">class </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">YajlParser</tt><big>(</big><em>content_handler=None</em>, <em>buf_siz=65536</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>A class that utilizes the Yajl C Library</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><em>content_handler</em> (<a title="yajl.yajl_parse.YajlContentHandler" class="reference internal" href="#yajl.yajl_parse.YajlContentHandler"><tt class="xref docutils literal"><span class="pre">YajlContentHandler</span></tt></a>) &#8211; content handler instance hosting the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>content_handler</strong> (<a class="reference internal" href="#yajl.yajl_parse.YajlContentHandler" title="yajl.yajl_parse.YajlContentHandler"><tt class="xref py py-class docutils literal"><span class="pre">YajlContentHandler</span></tt></a>) &#8211; content handler instance hosting the
 callbacks that will be called while parsing.</li>
-<li><em>allow_comments</em> (bool) &#8211; if comments are allowed in the document</li>
-<li><em>check_utf8</em> (bool) &#8211; if utf8 charachters are allowed in the document</li>
-<li><em>buf_siz</em> (int) &#8211; number of bytes to process from the input stream
+<li><strong>buf_siz</strong> (<em>int</em>) &#8211; number of bytes to process from the input stream
 at a time (minimum 1)</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<p>To configure the parser you need to set attributes. Attribute
+names are similar to that of yajl names less the &#8220;<a href="#id1"><span class="problematic" id="id2">yajl_</span></a>&#8221; prefix,
+for example:</p>
+<blockquote>
+<div>to enable yajl_allow_comments, set self.allow_comments=True</div></blockquote>
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlParser.parse">
-<tt class="descname">parse</tt><big>(</big><em>f=&lt;open file '&lt;stdin&gt;'</em>, <em>mode 'r' at 0x2ae243fcd0c0&gt;</em>, <em>ctx=None</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser.parse" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">parse</tt><big>(</big><em>f=&lt;open file '&lt;stdin&gt;'</em>, <em>mode 'r' at 0x2af92f74a150&gt;</em>, <em>ctx=None</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to parse a JSON stream.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><em>f</em> (file) &#8211; stream to parse JSON from</li>
-<li><em>ctx</em> (ctypes.POINTER) &#8211; passed to all callback functions as the first param this is
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>f</strong> (<em>file</em>) &#8211; stream to parse JSON from</li>
+<li><strong>ctx</strong> (<em>ctypes.POINTER</em>) &#8211; passed to all callback functions as the first param this is
 a feature of yajl, and not very useful in yajl-py since the context is
 preserved using the content_handler instance.</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name" colspan="2">Raises YajlError:</th></tr>
-<tr><td>&nbsp;</td><td class="field-body"><p class="first last">When invalid JSON in input stream found</p>
+<tr class="field-even field"><th class="field-name" colspan="2">Raises YajlError:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">When invalid JSON in input stream found</p>
 </td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="yajl.yajl_parse.YajlParser.yajl_config">
+<tt class="descname">yajl_config</tt><big>(</big><em>hand</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser.yajl_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="yajl.yajl_parse.yajl_callbacks">
 <em class="property">class </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">yajl_callbacks</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">_ctypes.Structure</span></tt></p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">_ctypes.Structure</span></tt></p>
+<dl class="attribute">
+<dt id="yajl.yajl_parse.yajl_callbacks._fields_">
+<tt class="descname">_fields_</tt><em class="property"> = [('yajl_null', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_boolean', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_integer', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_double', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_number', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_string', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_start_map', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_map_key', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_end_map', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_start_array', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_end_array', &lt;class 'ctypes.CFunctionType'&gt;)]</em><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks._fields_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_boolean">
 <tt class="descname">yajl_boolean</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_boolean" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_double">
 <tt class="descname">yajl_double</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_double" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_end_array">
 <tt class="descname">yajl_end_array</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_end_array" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_end_map">
 <tt class="descname">yajl_end_map</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_end_map" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_integer">
 <tt class="descname">yajl_integer</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_integer" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_map_key">
 <tt class="descname">yajl_map_key</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_map_key" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_null">
 <tt class="descname">yajl_null</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_null" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_number">
 <tt class="descname">yajl_number</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_number" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_start_array">
 <tt class="descname">yajl_start_array</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_start_array" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_start_map">
 <tt class="descname">yajl_start_map</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_start_map" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
+<dd><p>Structure/Union member</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_string">
 <tt class="descname">yajl_string</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_string" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
-
+<dd><p>Structure/Union member</p>
 </dd></dl>
-
-<dl class="class">
-<dt id="yajl.yajl_parse.yajl_parser_config">
-<em class="property">class </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">yajl_parser_config</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_parser_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref docutils literal"><span class="pre">_ctypes.Structure</span></tt></p>
-<dl class="attribute">
-<dt id="yajl.yajl_parse.yajl_parser_config.allowComments">
-<tt class="descname">allowComments</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_parser_config.allowComments" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
-
-<dl class="attribute">
-<dt id="yajl.yajl_parse.yajl_parser_config.checkUTF8">
-<tt class="descname">checkUTF8</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_parser_config.checkUTF8" title="Permalink to this definition">¶</a></dt>
-<dd>Structure/Union member</dd></dl>
 
 </dd></dl>
 
@@ -279,27 +315,27 @@ preserved using the content_handler instance.</li>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="yajl_gen.html"
-                                  title="previous chapter">yajl.yajl_gen</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="../sources/yajl/yajl_parse.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="../search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="yajl_gen.html"
+                        title="previous chapter">yajl.yajl_gen</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/yajl/yajl_parse.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -311,18 +347,18 @@ preserved using the content_handler instance.</li>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../modindex.html" title="Global Module Index"
+          <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
           <a href="yajl_gen.html" title="yajl.yajl_gen"
              >previous</a> |</li>
-        <li><a href="../index.html">Yajl-Py v1.0.11 documentation</a> &raquo;</li>
+        <li><a href="../index.html">Yajl-Py 1.0.11 documentation</a> &raquo;</li>
           <li><a href="index.html" >yajl</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2010, Hatem Nassrat.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.6.
+        &copy; Copyright 2010, Hatem Nassrat.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
     </div>
   </body>
 </html>

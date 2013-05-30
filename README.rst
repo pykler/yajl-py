@@ -31,7 +31,11 @@ From within the current directory run::
 
         - OR Alternatively -
 
-    easy_install .
+    pip install .
+
+To install from pypi::
+
+    pip install yajl-py
 
 Usage
 -----

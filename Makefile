@@ -15,9 +15,10 @@ usage:
 	@echo " doc     :" install docs to gh-pages branch
 
 install:
-	pip install .
+	pip install . --use-mirrors
 
 test:
+	pip install -r test_requirements.txt --use-mirrors
 	nosetests -v tests/
 
 doc: gh-pages

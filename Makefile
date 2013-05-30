@@ -19,7 +19,7 @@ install:
 
 test:
 	pip install -r test_requirements.txt --use-mirrors
-	nosetests -v tests/ --with-coverage --cover-inclusive --cover-package yajl
+	nosetests -v tests/ --with-coverage --cover-package yajl
 
 doc: gh-pages
 

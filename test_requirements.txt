@@ -1,2 +1,3 @@
 minimocktest
 nose
+nose-cov

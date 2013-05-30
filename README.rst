@@ -2,6 +2,10 @@
 yajl-py
 =======
 
+
+.. image:: https://travis-ci.org/pykler/yajl-py.png?branch=master
+   :target: https://travis-ci.org/pykler/yajl-py
+
 `yajl-py` is a Pure Python wrapper (implemented using
 ctypes) to the excellent Yajl (Yet Another JSON Library) C
 library.

@@ -15,3 +15,6 @@ tmp/
 dist/
 build/
 *.egg-info/
+
+# yajl build
+yajl-src

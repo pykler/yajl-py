@@ -1,5 +1,17 @@
-Welcome to Yajl-Py's documentation!
-===================================
+Yajl-Py documentation
+=====================
+
+.. image:: https://travis-ci.org/pykler/yajl-py.png?branch=master
+   :target: https://travis-ci.org/pykler/yajl-py
+
+.. image:: https://coveralls.io/repos/pykler/yajl-py/badge.png
+   :target: https://coveralls.io/r/pykler/yajl-py
+
+.. image:: https://pypip.in/v/yajl-py/badge.png
+   :target: https://crate.io/packages/yajl-py/#info
+
+.. image:: https://pypip.in/d/yajl-py/badge.png
+   :target: https://crate.io/packages/yajl-py/#info
 
 `yajl-py <http://github.com/pykler/yajl-py>`_ is a pure python wrapper
 to the `yajl <http://lloyd.github.com/yajl/>`_ C Library.

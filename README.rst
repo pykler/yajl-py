@@ -6,6 +6,12 @@ yajl-py
 .. image:: https://travis-ci.org/pykler/yajl-py.png?branch=master
    :target: https://travis-ci.org/pykler/yajl-py
 
+.. image:: https://pypip.in/v/yajl-py/badge.png
+   :target: https://crate.io/packages/yajl-py/#info
+
+.. image:: https://pypip.in/d/yajl-py/badge.png
+   :target: https://crate.io/packages/yajl-py/#info
+
 `yajl-py` is a Pure Python wrapper (implemented using
 ctypes) to the excellent Yajl (Yet Another JSON Library) C
 library.

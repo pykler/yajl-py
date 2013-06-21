@@ -15,11 +15,11 @@ yajl-py
 .. image:: https://pypip.in/d/yajl-py/badge.png
    :target: https://crate.io/packages/yajl-py/#info
 
-`yajl-py` is a Pure Python wrapper (implemented using
+``yajl-py`` is a Pure Python wrapper (implemented using
 ctypes) to the excellent Yajl (Yet Another JSON Library) C
 library.
 
-`yajl` and `yajl-py`, allow for fast stream parsing of JSON
+``yajl`` and ``yajl-py``, allow for fast stream parsing of JSON
 files, which enables the parsing of large files, that would
 not fit in memory.
 
@@ -27,13 +27,13 @@ Dependencies
 ------------
 
     - python 2.6 (or compatible)
-    - yajl (from http://lloyd.github.com/yajl/)
+    - `yajl <http://lloyd.github.com/yajl/>`_
 
 To run the tests you also require:
 
-    - make (to run `make test`)
-    - nose (debian package == `python-nose`)
-    - MiniMockTest (`pip install minimocktest`)
+    - make (to run ``make test``)
+    - nose (debian package == ``python-nose``)
+    - MiniMockTest (``pip install minimocktest``)
 
 Install
 -------
@@ -54,4 +54,13 @@ Usage
 -----
 
 The examples directory contains full featured JSON Parsers built using
-`yajl` and `yajl-py`. See `examples/README.rst` for more info.
+``yajl`` and ``yajl-py``. See `examples/README.rst <examples/>`_ for more info.
+
+Contributions
+-------------
+
+The following people provided valuable contributions to this library:
+
+ * `Peter Dobcsanyi`
+ * `Charles Gordon <https://github.com/cgordon>`_
+ * `Christopher Reighley <https://github.com/reighley-christopher>`_

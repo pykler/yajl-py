@@ -37,10 +37,12 @@ Installation
 
 To install the latest version of yajl-py, run::
 
-    easy_install yajl-py
+    pip install yajl-py
 
 For the development version you may visit
-`yajl-py at github <http://github.com/pykler/yajl-py>`_.
+`yajl-py at github <http://github.com/pykler/yajl-py>`_::
+
+    pip install git+https://github.com/pykler/yajl-py.git
 
 Alternatives
 ------------

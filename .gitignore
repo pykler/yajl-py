@@ -15,3 +15,8 @@ tmp/
 dist/
 build/
 *.egg-info/
+
+# developer specifics
+.virtualenv/
+.vagrant/
+Vagrantfile

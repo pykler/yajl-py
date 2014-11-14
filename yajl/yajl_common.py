@@ -41,7 +41,7 @@ def load_yajl():
 def get_yajl_version():
     '''
     To be used internally by yajl-py to fetch yajl's version
-    
+
     :rtype: string
     :returns: yajl's version in the format 'Major.Minor.Micro'
     '''
@@ -50,6 +50,7 @@ def get_yajl_version():
 
 yajl = load_yajl()
 
+# Yajl Parse
 yajl.yajl_alloc.restype = c_void_p
 yajl.yajl_alloc.argtypes = [c_void_p, c_void_p, c_void_p]
 yajl.yajl_config.restype = c_int
@@ -59,25 +60,29 @@ yajl.yajl_parse.restype = c_int
 yajl.yajl_parse.argtypes = [c_void_p, c_char_p, c_size_t]
 yajl.yajl_complete_parse.restype = c_int
 yajl.yajl_complete_parse.argtypes = [c_void_p]
-yajl.yajl_gen_alloc.restype = c_void_p
-yajl.yajl_gen_alloc_argtypes = []
-yajl.yajl_gen_bool.argtypes = [c_void_p, c_bool]
-yajl.yajl_gen_array_close.argtypes = [c_void_p]
-yajl.yajl_gen_array_open.argtypes = [c_void_p]
-yajl.yajl_gen_clear.argtypes = [c_void_p]
-yajl.yajl_gen_config.restype = c_int
-yajl.yajl_gen_config.argtypes = [c_void_p, c_int]
-yajl.yajl_gen_double.argtypes = [c_void_p, c_double]
 yajl.yajl_get_error.restype = c_char_p
-yajl.yajl_gen_get_buf.restype = c_int
-yajl.yajl_gen_get_buf.argtypes = [c_void_p, c_void_p, c_void_p]
+yajl.yajl_get_error.argtypes = [c_void_p, c_int, c_char_p, c_size_t]
+yajl.yajl_get_bytes_consumed.restype = c_size_t
+yajl.yajl_get_bytes_consumed.argtypes = [c_void_p]
+yajl.yajl_free_error.restype = None
+yajl.yajl_free_error.argtypes = [c_void_p, c_char_p]
+# Yajl Gen
+yajl.yajl_gen_config.argtypes = [c_void_p, c_int]
+yajl.yajl_gen_alloc.restype = c_void_p
+yajl.yajl_gen_alloc_argtypes = [c_void_p]
+yajl.yajl_gen_free.restype = None
+yajl.yajl_gen_free.argtypes = [c_void_p]
 yajl.yajl_gen_integer.argtypes = [c_void_p, c_longlong]
-yajl.yajl_gen_map_close.argtypes = [c_void_p]
-yajl.yajl_gen_map_open.argtypes = [c_void_p]
-yajl.yajl_gen_null.argtypes = [c_void_p]
+yajl.yajl_gen_double.argtypes = [c_void_p, c_double]
 yajl.yajl_gen_number.argtypes = [c_void_p, c_char_p, c_int]
 yajl.yajl_gen_string.argtypes = [c_void_p, c_char_p, c_int]
-yajl.yajl_get_error.argtypes = [c_void_p, c_int, c_char_p, c_size_t]
-yajl.yajl_get_bytes_consumed.restype = c_uint
-yajl.yajl_get_bytes_consumed.argtypes = [c_void_p, c_char_p]
-yajl.yajl_gen_free.argtypes = [c_void_p]
+yajl.yajl_gen_null.argtypes = [c_void_p]
+yajl.yajl_gen_bool.argtypes = [c_void_p, c_bool]
+yajl.yajl_gen_map_open.argtypes = [c_void_p]
+yajl.yajl_gen_map_close.argtypes = [c_void_p]
+yajl.yajl_gen_array_open.argtypes = [c_void_p]
+yajl.yajl_gen_array_close.argtypes = [c_void_p]
+yajl.yajl_gen_get_buf.argtypes = [c_void_p, c_void_p, c_void_p]
+yajl.yajl_gen_clear.argtypes = [c_void_p]
+yajl.yajl_gen_reset.restype = None
+yajl.yajl_gen_reset.argtypes = [c_void_p, c_char_p]

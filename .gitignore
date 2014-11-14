@@ -16,6 +16,9 @@ dist/
 build/
 *.egg-info/
 
+# yajl build
+yajl-src
+
 # developer specifics
 .virtualenv/
 .vagrant/

@@ -41,7 +41,7 @@ class YajlGen(object):
         :type indent: string
 
         .. attribute:: g
-        
+
             instance of :ctype:`yajl_gen` returned by
             :cfunc:`yajl.yajl_gen_alloc`.
             This should not be used directly.
@@ -55,10 +55,12 @@ class YajlGen(object):
             ('gen_escape_solidus', yajl_gen_escape_solidus),
         ])
         for k,v in kwargs.items():
-            yajl.yajl_gen_config(self.g, config_map[k], v)
+            self._yajl_gen('yajl_gen_config', config_map[k], v)
 
     def __del__(self):
-        yajl.yajl_gen_free(self.g)
+        self._yajl_gen('yajl_gen_free')
+    def yajl_gen_reset(self, sep=''):
+        self._yajl_gen('yajl_gen_reset', sep)
     def _assert_retval(self, retval):
         '''
         :param retval: yajl_gen_status return code
@@ -79,39 +81,48 @@ class YajlGen(object):
         l = c_uint()
         buf = POINTER(c_ubyte)()
         self._assert_retval(
-            yajl.yajl_gen_get_buf(self.g, byref(buf), byref(l))
+            self._yajl_gen('yajl_gen_get_buf', byref(buf), byref(l))
         )
         try:
             return string_at(buf, l.value)
         finally:
-            yajl.yajl_gen_clear(self.g)
+            self._yajl_gen('yajl_gen_clear')
+    def _yajl_gen(self, name, *args):
+        '''
+        Call the underlying yajl_gen c function/method
+        ``self.g`` must be already allocated
+        '''
+        return getattr(yajl, name)(self.g, *args)
     def _dispatch(self, name, *args):
         '''
         :param name: yajl func ``name`` to dispatch to
         :type name: string
         :param args: arguments to pass to the dispatchee
         :type args: list or tuple
+
+        Asserts that the returned value is proper or raises the proper
+        ``YajlGenException``
         '''
         self._assert_retval(
-            getattr(yajl, name)(self.g, *args)
+            self._yajl_gen(name, *args)
         )
     def yajl_gen_null(self):
         ''' Generate json value ``null`` '''
         self._dispatch('yajl_gen_null')
     def yajl_gen_bool(self, b):
-        ''' 
+        '''
         :param b: flag to be jsonified
         :type b: bool
         '''
         self._dispatch('yajl_gen_bool', b)
     def yajl_gen_integer(self, n):
-        ''' 
+        '''
         :param n: number to be jsonified
         :type n: int
         '''
         self._dispatch('yajl_gen_integer', c_longlong(n))
     def yajl_gen_double(self, n):
-        ''' 
+        '''
         :param n: number to be jsonified
         :type n: float
         '''
@@ -126,7 +137,7 @@ class YajlGen(object):
         '''
         self._dispatch('yajl_gen_number', c_char_p(s), len(s))
     def yajl_gen_string(self, s):
-        ''' 
+        '''
         :param s: string to be jsonified
         :type s: string
         '''

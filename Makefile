@@ -24,7 +24,7 @@ test:
 doc: gh-pages
 
 gh-pages: build-doc
-	git co gh-pages
+	git checkout gh-pages
 	rsync -vcr ${HTMLDIR}/ ./
 
 build-doc:

@@ -37,6 +37,6 @@ build-doc:
 deps:
 	rm -fr yajl-src
 	git clone https://github.com/lloyd/yajl.git yajl-src
-	(cd yajl-src; git checkout 4c539cb5b; git reset --hard; ./configure)
+	(cd yajl-src; git checkout 12ee82ae51; git reset --hard; ./configure)
 	sudo make -C yajl-src install
 	sudo ldconfig

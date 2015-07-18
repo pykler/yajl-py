@@ -11,14 +11,14 @@ usage:
 	@echo Targets
 	@echo " install :" easy_install yajl-py
 	@echo " deps    :" install compatible yajl version
-	@echo " test    :" run yajl-py tests 
+	@echo " test    :" run yajl-py tests
 	@echo " doc     :" install docs to gh-pages branch
 
 install:
-	pip install . --use-mirrors
+	pip install .
 
 test:
-	pip install -r test_requirements.txt --use-mirrors
+	pip install -r test_requirements.txt
 	nosetests --with-cov --cover-erase --cov yajl -v tests/
 
 doc: gh-pages

@@ -3,7 +3,7 @@ Code that allows use of api/yajl_gen.h
 
 '''
 
-from yajl_common import *
+from .yajl_common import *
 
 yajl_gen_status = {
     0: 'yajl_gen_status_ok',
@@ -23,7 +23,7 @@ yajl_gen_indent_string,
 yajl_gen_print_callback,
 yajl_gen_validate_utf8,
 yajl_gen_escape_solidus,
-) = map(c_int, [2**x for x in range(5)])
+) = list(map(c_int, [2**x for x in range(5)]))
 
 class YajlGenException(YajlError):
     pass
@@ -54,7 +54,7 @@ class YajlGen(object):
             ('validate_utf8', yajl_gen_validate_utf8),
             ('gen_escape_solidus', yajl_gen_escape_solidus),
         ])
-        for k,v in kwargs.items():
+        for k,v in list(kwargs.items()):
             self._yajl_gen('yajl_gen_config', config_map[k], v)
 
     def __del__(self):
@@ -135,13 +135,13 @@ class YajlGen(object):
         **Note** to print floats or ints use :meth:`yajl_gen_double`
         or :meth:`yajl_gen_integer` respectively.
         '''
-        self._dispatch('yajl_gen_number', c_char_p(s), len(s))
+        self._dispatch('yajl_gen_number', c_char_p(s.encode('utf-8')), len(s))
     def yajl_gen_string(self, s):
         '''
         :param s: string to be jsonified
         :type s: string
         '''
-        self._dispatch('yajl_gen_string', c_char_p(s), len(s))
+        self._dispatch('yajl_gen_string', c_char_p(s.encode('utf-8')), len(s))
     def yajl_gen_map_open(self):
         ''' indicate json map begin '''
         self._dispatch('yajl_gen_map_open')

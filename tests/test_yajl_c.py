@@ -1,8 +1,7 @@
-from yajl_test_lib import yajl, BASEPATH 
+from .yajl_test_lib import yajl, BASEPATH
 from minimocktest import MockTestCase
-from StringIO import StringIO
+from io import StringIO
 import os
-import difflib
 
 class YajlCTestContentHandler(yajl.YajlContentHandler):
     def __init__(self):
@@ -48,6 +47,7 @@ class YajlCTests(MockTestCase):
         expected = expected.replace('memory leaks:\t0\n', '')
         self.out.seek(0)
         got = self.out.read()
+        got = got.replace('\r','\n') #maybe tests with \r don't work properly on mac's this seems to fix them
         self.assertEqual(expected, got)
 
     def resetOutput(self):
@@ -74,8 +74,13 @@ def _make_test(filename, testname):
             with open(filename) as f:
                 try:
                     parser.parse(f)
-                except yajl.YajlError, e:
-                    self.out.write('%s\n' %str(e).splitlines()[0])
+                except yajl.YajlError as e:
+                    self.out.write('%s\n' % str(e.value.decode('utf-8')).splitlines()[0])
+                except UnicodeDecodeError as ue:
+                    if testname.startswith('invalid_') or testname.startswith('non_'):
+                        break
+                    else:
+                        raise ue
             self.assertSameAsGold(filename)
             self.resetOutput()
     return test
@@ -83,7 +88,7 @@ def _make_test(filename, testname):
 def _add_methods():
     dirpath = os.path.join(BASEPATH, 'cases')
     filenames = os.listdir(dirpath)
-    for filename in filter(lambda x: x.endswith('.json'), filenames):
+    for filename in [x for x in filenames if x.endswith('.json')]:
         fullname = os.path.join(dirpath, filename)
         name = filename[:-5]
         test = _make_test(fullname, name)

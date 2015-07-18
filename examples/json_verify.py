@@ -7,7 +7,7 @@ import sys
 BASEPATH = os.path.dirname(os.path.realpath(__file__))
 sys.path = [BASEPATH, '%s/..' %BASEPATH] + sys.path
 from yajl import __version__ as yajl_version
-from yajl import *
+from yajl import YajlParser, YajlError
 
 import optparse
 
@@ -31,12 +31,12 @@ def main():
     retval = 0
     try:
         yajl_parser.parse()
-    except YajlError, e:
+    except YajlError as e:
         retval = 1
         if options.verbose:
-            sys.stderr.write(str(e))
+            sys.stderr.write(e.value.decode('utf-8'))
     if options.verbose:
-        print "JSON is %s" %("invalid" if retval else "valid")
+        print("JSON is %s" %("invalid" if retval else "valid"))
     raise SystemExit(retval)
 
 if __name__ == "__main__":

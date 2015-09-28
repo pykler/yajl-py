@@ -23,3 +23,6 @@ yajl-src
 .virtualenv/
 .vagrant/
 Vagrantfile
+
+# testing stuff
+\.coverage

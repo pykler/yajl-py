@@ -3,29 +3,42 @@ from minimocktest import MockTestCase
 from StringIO import StringIO
 import sys
 
+
 class BaseContentHandler(yajl.YajlContentHandler):
+
     def yajl_null(self, ctx):
         pass
+
     def yajl_boolean(self, ctx, boolVal):
         pass
+
     def yajl_integer(self, ctx, integerVal):
         pass
+
     def yajl_double(self, ctx, doubleVal):
         pass
+
 #     def yajl_number(self, ctx, stringNum):
 #         pass
+
     def yajl_string(self, ctx, stringVal):
         pass
+
     def yajl_start_map(self, ctx):
         pass
+
     def yajl_map_key(self, ctx, stringVal):
         pass
+
     def yajl_end_map(self, ctx):
         pass
+
     def yajl_start_array(self, ctx):
         pass
+
     def yajl_end_array(self, ctx):
         pass
+
 
 class YajlParserTests(MockTestCase):
     '''
@@ -72,10 +85,10 @@ class YajlParserTests(MockTestCase):
 
     def test_allCallbacksExceptNumber(self):
         for func in [
-            'null', 'boolean', 'integer', 'double', 'string',
-            'start_map', 'map_key', 'end_map',
-            'start_array', 'end_array']:
-            self.mock('self.content_handler.yajl_%s' %(func))
+                'null', 'boolean', 'integer', 'double', 'string',
+                'start_map', 'map_key', 'end_map',
+                'start_array', 'end_array']:
+            self.mock('self.content_handler.yajl_%s' % (func))
         parser = yajl.YajlParser(self.content_handler)
         parser.parse(self.basic_json)
         self.assertSameTrace(
@@ -92,22 +105,22 @@ class YajlParserTests(MockTestCase):
         )
 
     def test_largestNumberAcceptableInIntegerCallback(self):
-        good_json = StringIO('[%s]' %(sys.maxint))
-        bad_json = StringIO('[%s]' %(sys.maxint+1))
+        good_json = StringIO('[%s]' % (sys.maxint))
+        bad_json = StringIO('[%s]' % (sys.maxint + 1))
         self.mock('self.content_handler.yajl_integer')
         parser = yajl.YajlParser(self.content_handler)
         parser.parse(good_json)
         self.assertSameTrace(
-            "Called self.content_handler.yajl_integer(None, %s)\n" %sys.maxint
+            "Called self.content_handler.yajl_integer(None, %s)\n" % sys.maxint
         )
         self.assertRaises(yajl.YajlError, parser.parse, bad_json)
 
     def test_ctxIsPassedToAllCallbacks(self):
         for func in [
-            'null', 'boolean', 'integer', 'double', 'string',
-            'start_map', 'map_key', 'end_map',
-            'start_array', 'end_array']:
-            self.mock('self.content_handler.yajl_%s' %(func))
+                'null', 'boolean', 'integer', 'double', 'string',
+                'start_map', 'map_key', 'end_map',
+                'start_array', 'end_array']:
+            self.mock('self.content_handler.yajl_%s' % (func))
         parser = yajl.YajlParser(self.content_handler)
         ctx = yajl.create_string_buffer('TEST')
         parser.parse(self.basic_json, ctx=yajl.byref(ctx))
@@ -141,6 +154,7 @@ class YajlParserTests(MockTestCase):
         self.assertRaises(
             yajl.YajlError,
             parser.parse, invalid_json)
+
 
 class YajlGenTests(MockTestCase):
     '''
@@ -216,6 +230,7 @@ class YajlGenTests(MockTestCase):
             '}\n',
             ''.join(results))
 
+
 class YajlCommonTests(MockTestCase):
     '''
     Testing common functions and the loading libyajl
@@ -236,11 +251,10 @@ class YajlCommonTests(MockTestCase):
                     yajl_version = major * 10000 + minor * 100 + micro
                     self.mock('yajl.yajl.yajl_version', returns=yajl_version)
                     self.assertEqual(
-                        '%s.%s.%s' %(major, minor, micro),
+                        '%s.%s.%s' % (major, minor, micro),
                         yajl.get_yajl_version())
 
     def test_check_yajl_version_warnsOnlyWhenMismatchedVersions(self):
-        import warnings
         self.mock('warnings.warn')
         self.mock('yajl.wrapped.__version__', mock_obj='1.1.1')
         self.mock('yajl.wrapped.yajl_version', mock_obj='1.1.1')
@@ -250,9 +264,9 @@ class YajlCommonTests(MockTestCase):
         self.assertFalse(yajl.check_yajl_version())
         self.assertSameTrace(
             "Called warnings.warn("
-                "'Using Yajl-Py v1.1.1 with Yajl v1.1.0. "
-                "It is advised to use the same Yajl-Py and Yajl versions',"
-                "<type 'exceptions.RuntimeWarning'>, stacklevel=3)"
+            "'Using Yajl-Py v1.1.1 with Yajl v1.1.0. "
+            "It is advised to use the same Yajl-Py and Yajl versions',"
+            "<type 'exceptions.RuntimeWarning'>, stacklevel=3)"
         )
 
     def test_checkYajlPyAndYajlHaveSameVersion(self):

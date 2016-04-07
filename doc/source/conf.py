@@ -11,7 +11,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 import sys, os
-import sphinx_rtd_theme
+import alabaster
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -23,7 +23,7 @@ sys.path = [os.path.abspath('../../')] + sys.path
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.coverage']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.todo', 'sphinx.ext.coverage', 'alabaster']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['templates']
@@ -94,19 +94,23 @@ pygments_style = 'sphinx'
 # Sphinx are currently 'default' and 'sphinxdoc'.
 # html_theme = 'default'
 # html_theme = 'sphinxdoc'
-html_theme = "sphinx_rtd_theme"
+html_theme = "alabaster"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-html_theme_options = {}
-# html_theme_options = {
-#     "stickysidebar": "true",
-# }
+html_theme_options = {
+    'github_user': 'pykler',
+    'github_repo': 'yajl-py',
+    'github_button': True,
+    'github_banner': True,
+    'travis_button': True,
+    'analytics_id': 'UA-19175962-1',
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+html_theme_path = [alabaster.get_path()]
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".

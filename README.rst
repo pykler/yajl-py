@@ -9,15 +9,6 @@ yajl-py
 .. image:: https://coveralls.io/repos/pykler/yajl-py/badge.png
    :target: https://coveralls.io/r/pykler/yajl-py
 
-.. image:: https://pypip.in/v/yajl-py/badge.png
-   :target: https://crate.io/packages/yajl-py/#info
-
-.. image:: https://pypip.in/d/yajl-py/badge.png
-   :target: https://crate.io/packages/yajl-py/#info
-
-.. image:: https://requires.io/github/pykler/yajl-py/requirements.png?branch=master
-   :target: https://requires.io/github/pykler/yajl-py/requirements/?branch=master
-
 ``yajl-py`` is a Pure Python wrapper (implemented using
 ctypes) to the excellent Yajl (Yet Another JSON Library) C
 library.

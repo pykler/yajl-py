@@ -1,129 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>yajl.yajl_gen &mdash; Yajl-Py 2.1.1 documentation</title>
-  
-
-  
-  
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  
-  
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-
-  
-
-  
-  
-    <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="top" title="Yajl-Py 2.1.1 documentation" href="../index.html"/>
-        <link rel="up" title="yajl" href="index.html"/>
-        <link rel="next" title="yajl.yajl_parse" href="yajl_parse.html"/>
-        <link rel="prev" title="yajl.yajl_common" href="yajl_common.html"/>
-     
+    <title>yajl.yajl_gen &mdash; Yajl-Py 2.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-19175962-1']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
     </script>
-
-
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Yajl-Py 2.1.1 documentation" href="../index.html" />
+    <link rel="up" title="yajl" href="index.html" />
+    <link rel="next" title="yajl.yajl_parse" href="yajl_parse.html" />
+    <link rel="prev" title="yajl.yajl_common" href="yajl_common.html" />
+   
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-</head>
+  </head>
+  <body role="document">  
 
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="../index.html" class="fa fa-home"> Yajl-Py</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-      </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">yajl</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#sub-modules">Sub-Modules</a></li>
-</ul>
-</li>
-</ul>
-
-        
-      </div>
-      &nbsp;
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">Yajl-Py</a>
-      </nav>
-
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
-          <li><a href="index.html">yajl</a> &raquo;</li>
-      
-    <li>yajl.yajl_gen</li>
-      <li class="wy-breadcrumbs-aside">
-        
-          <a href="../sources/yajl/yajl_gen.txt" rel="nofollow"> View page source</a>
-        
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main">
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
   <div class="section" id="module-yajl.yajl_gen">
 <span id="yajl-yajl-gen"></span><h1>yajl.yajl_gen<a class="headerlink" href="#module-yajl.yajl_gen" title="Permalink to this headline">¶</a></h1>
 <p>Code that allows use of api/yajl_gen.h</p>
 <dl class="exception">
 <dt id="yajl.yajl_gen.YajlGenException">
-<em class="property">exception </em><tt class="descclassname">yajl.yajl_gen.</tt><tt class="descname">YajlGenException</tt><big>(</big><em>value=''</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGenException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="yajl_common.html#yajl.yajl_common.YajlError" title="yajl.yajl_common.YajlError"><tt class="xref py py-class docutils literal"><span class="pre">yajl.yajl_common.YajlError</span></tt></a></p>
+<em class="property">exception </em><code class="descclassname">yajl.yajl_gen.</code><code class="descname">YajlGenException</code><span class="sig-paren">(</span><em>value=''</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGenException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="yajl_common.html#yajl.yajl_common.YajlError" title="yajl.yajl_common.YajlError"><code class="xref py py-class docutils literal"><span class="pre">yajl.yajl_common.YajlError</span></code></a></p>
 </dd></dl>
 
 <dl class="class">
 <dt id="yajl.yajl_gen.YajlGen">
-<em class="property">class </em><tt class="descclassname">yajl.yajl_gen.</tt><tt class="descname">YajlGen</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<em class="property">class </em><code class="descclassname">yajl.yajl_gen.</code><code class="descname">YajlGen</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Yajl Generator - json formatting using yajl_gen</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -139,23 +67,22 @@
 </table>
 <dl class="attribute">
 <dt id="yajl.yajl_gen.YajlGen.g">
-<tt class="descname">g</tt><a class="headerlink" href="#yajl.yajl_gen.YajlGen.g" title="Permalink to this definition">¶</a></dt>
-<dd><p>instance of <tt class="xref c c-type docutils literal"><span class="pre">yajl_gen</span></tt> returned by
-<tt class="xref c c-func docutils literal"><span class="pre">yajl.yajl_gen_alloc()</span></tt>.
+<code class="descname">g</code><a class="headerlink" href="#yajl.yajl_gen.YajlGen.g" title="Permalink to this definition">¶</a></dt>
+<dd><p>instance of <a href="#id1"><span class="problematic" id="id2">:ctype:`yajl_gen`</span></a> returned by
+<a href="#id3"><span class="problematic" id="id4">:cfunc:`yajl.yajl_gen_alloc`</span></a>.
 This should not be used directly.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen._assert_retval">
-<tt class="descname">_assert_retval</tt><big>(</big><em>retval</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen._assert_retval" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_assert_retval</code><span class="sig-paren">(</span><em>retval</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen._assert_retval" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>retval</strong> (<em>int</em>) &#8211; yajl_gen_status return code</td>
 </tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Raises YajlGenException:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body">When retval is != yajl_gen_status_ok</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>YajlGenException</strong> &#8211; When retval is != yajl_gen_status_ok</td>
 </tr>
 </tbody>
 </table>
@@ -163,13 +90,13 @@ This should not be used directly.</p>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen._dispatch">
-<tt class="descname">_dispatch</tt><big>(</big><em>name</em>, <em>*args</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen._dispatch" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_dispatch</code><span class="sig-paren">(</span><em>name</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen._dispatch" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>name</strong> (<em>string</em>) &#8211; yajl func <tt class="docutils literal"><span class="pre">name</span></tt> to dispatch to</li>
+<li><strong>name</strong> (<em>string</em>) &#8211; yajl func <code class="docutils literal"><span class="pre">name</span></code> to dispatch to</li>
 <li><strong>args</strong> (<em>list or tuple</em>) &#8211; arguments to pass to the dispatchee</li>
 </ul>
 </td>
@@ -177,31 +104,31 @@ This should not be used directly.</p>
 </tbody>
 </table>
 <p>Asserts that the returned value is proper or raises the proper
-<tt class="docutils literal"><span class="pre">YajlGenException</span></tt></p>
+<code class="docutils literal"><span class="pre">YajlGenException</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen._yajl_gen">
-<tt class="descname">_yajl_gen</tt><big>(</big><em>name</em>, <em>*args</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen._yajl_gen" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_yajl_gen</code><span class="sig-paren">(</span><em>name</em>, <em>*args</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen._yajl_gen" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call the underlying yajl_gen c function/method
-<tt class="docutils literal"><span class="pre">self.g</span></tt> must be already allocated</p>
+<code class="docutils literal"><span class="pre">self.g</span></code> must be already allocated</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_array_close">
-<tt class="descname">yajl_gen_array_close</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_array_close" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_array_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_array_close" title="Permalink to this definition">¶</a></dt>
 <dd><p>indicate json array close</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_array_open">
-<tt class="descname">yajl_gen_array_open</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_array_open" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_array_open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_array_open" title="Permalink to this definition">¶</a></dt>
 <dd><p>indicate json array begin</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_bool">
-<tt class="descname">yajl_gen_bool</tt><big>(</big><em>b</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_bool" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_bool</code><span class="sig-paren">(</span><em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_bool" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -214,7 +141,7 @@ This should not be used directly.</p>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_double">
-<tt class="descname">yajl_gen_double</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_double" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_double</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_double" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -227,7 +154,7 @@ This should not be used directly.</p>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_get_buf">
-<tt class="descname">yajl_gen_get_buf</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_get_buf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_get_buf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_get_buf" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -245,7 +172,7 @@ last call.</p>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_integer">
-<tt class="descname">yajl_gen_integer</tt><big>(</big><em>n</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_integer" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_integer</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_integer" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -258,25 +185,25 @@ last call.</p>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_map_close">
-<tt class="descname">yajl_gen_map_close</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_map_close" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_map_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_map_close" title="Permalink to this definition">¶</a></dt>
 <dd><p>indicate json map close</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_map_open">
-<tt class="descname">yajl_gen_map_open</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_map_open" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_map_open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_map_open" title="Permalink to this definition">¶</a></dt>
 <dd><p>indicate json map begin</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_null">
-<tt class="descname">yajl_gen_null</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_null" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate json value <tt class="docutils literal"><span class="pre">null</span></tt></p>
+<code class="descname">yajl_gen_null</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_null" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate json value <code class="docutils literal"><span class="pre">null</span></code></p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_number">
-<tt class="descname">yajl_gen_number</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_number" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_number</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_number" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -285,18 +212,18 @@ last call.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Note</strong> to print floats or ints use <a class="reference internal" href="#yajl.yajl_gen.YajlGen.yajl_gen_double" title="yajl.yajl_gen.YajlGen.yajl_gen_double"><tt class="xref py py-meth docutils literal"><span class="pre">yajl_gen_double()</span></tt></a>
-or <a class="reference internal" href="#yajl.yajl_gen.YajlGen.yajl_gen_integer" title="yajl.yajl_gen.YajlGen.yajl_gen_integer"><tt class="xref py py-meth docutils literal"><span class="pre">yajl_gen_integer()</span></tt></a> respectively.</p>
+<p><strong>Note</strong> to print floats or ints use <a class="reference internal" href="#yajl.yajl_gen.YajlGen.yajl_gen_double" title="yajl.yajl_gen.YajlGen.yajl_gen_double"><code class="xref py py-meth docutils literal"><span class="pre">yajl_gen_double()</span></code></a>
+or <a class="reference internal" href="#yajl.yajl_gen.YajlGen.yajl_gen_integer" title="yajl.yajl_gen.YajlGen.yajl_gen_integer"><code class="xref py py-meth docutils literal"><span class="pre">yajl_gen_integer()</span></code></a> respectively.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_reset">
-<tt class="descname">yajl_gen_reset</tt><big>(</big><em>sep=''</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_reset" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_reset</code><span class="sig-paren">(</span><em>sep=''</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_reset" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_gen.YajlGen.yajl_gen_string">
-<tt class="descname">yajl_gen_string</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_string" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_gen_string</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_gen.YajlGen.yajl_gen_string" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -313,67 +240,75 @@ or <a class="reference internal" href="#yajl.yajl_gen.YajlGen.yajl_gen_integer" 
 
 
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="yajl_parse.html" class="btn btn-neutral float-right" title="yajl.yajl_parse"/>Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="yajl_common.html" class="btn btn-neutral" title="yajl.yajl_common"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 2010, Hatem Nassrat.
-    </p>
-  </div>
-
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
-</footer>
         </div>
       </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">yajl</a><ul>
+      <li>Previous: <a href="yajl_common.html" title="previous chapter">yajl.yajl_common</a></li>
+      <li>Next: <a href="yajl_parse.html" title="next chapter">yajl.yajl_parse</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/yajl/yajl_gen.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2010, Hatem Nassrat.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="../sources/yajl/yajl_gen.txt"
+          rel="nofollow">Page source</a>
+    </div>
 
-    </section>
+    
+    <a href="https://github.com/pykler/yajl-py" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
 
-  </div>
-  
-
-
-  
-
+    
     <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'2.1.1',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19175962-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
     </script>
-      <script type="text/javascript" src="../static/jquery.js"></script>
-      <script type="text/javascript" src="../static/underscore.js"></script>
-      <script type="text/javascript" src="../static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../static/js/theme.js"></script>
-  
-
-  
-  
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
-      });
-  </script>
-   
-
-</body>
+    
+  </body>
 </html>

@@ -1,130 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>yajl.yajl_parse &mdash; Yajl-Py 2.1.1 documentation</title>
-  
-
-  
-  
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  
-  
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-
-  
-
-  
-  
-    <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="top" title="Yajl-Py 2.1.1 documentation" href="../index.html"/>
-        <link rel="up" title="yajl" href="index.html"/>
-        <link rel="prev" title="yajl.yajl_gen" href="yajl_gen.html"/>
-     
+    <title>yajl.yajl_parse &mdash; Yajl-Py 2.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-19175962-1']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
     </script>
-
-
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Yajl-Py 2.1.1 documentation" href="../index.html" />
+    <link rel="up" title="yajl" href="index.html" />
+    <link rel="prev" title="yajl.yajl_gen" href="yajl_gen.html" />
+   
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-</head>
+  </head>
+  <body role="document">  
 
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="../index.html" class="fa fa-home"> Yajl-Py</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-      </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">yajl</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#sub-modules">Sub-Modules</a></li>
-</ul>
-</li>
-</ul>
-
-        
-      </div>
-      &nbsp;
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../index.html">Yajl-Py</a>
-      </nav>
-
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-      
-          <li><a href="index.html">yajl</a> &raquo;</li>
-      
-    <li>yajl.yajl_parse</li>
-      <li class="wy-breadcrumbs-aside">
-        
-          <a href="../sources/yajl/yajl_parse.txt" rel="nofollow"> View page source</a>
-        
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main">
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
   <div class="section" id="module-yajl.yajl_parse">
 <span id="yajl-yajl-parse"></span><h1>yajl.yajl_parse<a class="headerlink" href="#module-yajl.yajl_parse" title="Permalink to this headline">¶</a></h1>
 <p>Code that allows use of api/yajl_parse.h</p>
 <dl class="exception">
 <dt id="yajl.yajl_parse.YajlParseCancelled">
-<em class="property">exception </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">YajlParseCancelled</tt><a class="headerlink" href="#yajl.yajl_parse.YajlParseCancelled" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="yajl_common.html#yajl.yajl_common.YajlError" title="yajl.yajl_common.YajlError"><tt class="xref py py-class docutils literal"><span class="pre">yajl.yajl_common.YajlError</span></tt></a></p>
+<em class="property">exception </em><code class="descclassname">yajl.yajl_parse.</code><code class="descname">YajlParseCancelled</code><a class="headerlink" href="#yajl.yajl_parse.YajlParseCancelled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="yajl_common.html#yajl.yajl_common.YajlError" title="yajl.yajl_common.YajlError"><code class="xref py py-class docutils literal"><span class="pre">yajl.yajl_common.YajlError</span></code></a></p>
 </dd></dl>
 
 <dl class="class">
 <dt id="yajl.yajl_parse.YajlContentHandler">
-<em class="property">class </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">YajlContentHandler</tt><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<em class="property">class </em><code class="descclassname">yajl.yajl_parse.</code><code class="descname">YajlContentHandler</code><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Subclass this Abstract Base Class and implement the callback routines that
-will be called by the <a class="reference internal" href="#yajl.yajl_parse.YajlParser" title="yajl.yajl_parse.YajlParser"><tt class="xref py py-class docutils literal"><span class="pre">YajlParser</span></tt></a> instance that you will pass an
+will be called by the <a class="reference internal" href="#yajl.yajl_parse.YajlParser" title="yajl.yajl_parse.YajlParser"><code class="xref py py-class docutils literal"><span class="pre">YajlParser</span></code></a> instance that you will pass an
 instance of the subclass (phew! did you get that?) to.</p>
 <p>Note about handling of numbers (from yajl docs):</p>
 <blockquote>
@@ -136,104 +64,104 @@ that is yajl_integer and yajl_double will be ignored. If
 yajl_number is NULL but one of yajl_integer or yajl_double are
 defined, parsing of a number larger than is representable
 in a double or long long int will result in a parse error.</div></blockquote>
-<p>Due to the above, implementing <tt class="xref py py-meth docutils literal"><span class="pre">yajl_number()</span></tt> takes prescedence and
-the <tt class="xref py py-meth docutils literal"><span class="pre">yajl_integer()</span></tt> &amp; <tt class="xref py py-meth docutils literal"><span class="pre">yajl_double()</span></tt> callbacks will be ignored.
+<p>Due to the above, implementing <code class="xref py py-meth docutils literal"><span class="pre">yajl_number()</span></code> takes prescedence and
+the <code class="xref py py-meth docutils literal"><span class="pre">yajl_integer()</span></code> &amp; <code class="xref py py-meth docutils literal"><span class="pre">yajl_double()</span></code> callbacks will be ignored.
 For this reason none of these three methods are enforced by the Abstract
 Base Class</p>
-<p><strong>Note</strong> all methods must accept a param <tt class="xref py py-obj docutils literal"><span class="pre">ctx</span></tt> as the first argument,
+<p><strong>Note</strong> all methods must accept a param <code class="xref py py-obj docutils literal"><span class="pre">ctx</span></code> as the first argument,
 this is a yajl feature that is implemented in yajl-py but not very useful
-in python.  see <a class="reference internal" href="#yajl.yajl_parse.YajlParser.parse" title="yajl.yajl_parse.YajlParser.parse"><tt class="xref py py-meth docutils literal"><span class="pre">YajlParser.parse()</span></tt></a> for more info on <tt class="xref py py-obj docutils literal"><span class="pre">ctx</span></tt>.</p>
+in python.  see <a class="reference internal" href="#yajl.yajl_parse.YajlParser.parse" title="yajl.yajl_parse.YajlParser.parse"><code class="xref py py-meth docutils literal"><span class="pre">YajlParser.parse()</span></code></a> for more info on <code class="xref py py-obj docutils literal"><span class="pre">ctx</span></code>.</p>
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.complete_parse">
-<tt class="descname">complete_parse</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.complete_parse" title="Permalink to this definition">¶</a></dt>
+<code class="descname">complete_parse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.complete_parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when the parsing of the stream has finished</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.parse_buf">
-<tt class="descname">parse_buf</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.parse_buf" title="Permalink to this definition">¶</a></dt>
+<code class="descname">parse_buf</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.parse_buf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when a complete buffer has been parsed from the stream</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.parse_start">
-<tt class="descname">parse_start</tt><big>(</big><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.parse_start" title="Permalink to this definition">¶</a></dt>
+<code class="descname">parse_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.parse_start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called before each stream is parsed</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.yajl_boolean">
-<tt class="descname">yajl_boolean</tt><big>(</big><em>ctx</em>, <em>boolVal</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_boolean" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_boolean</code><span class="sig-paren">(</span><em>ctx</em>, <em>boolVal</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_boolean" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.yajl_end_array">
-<tt class="descname">yajl_end_array</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_end_array" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_end_array</code><span class="sig-paren">(</span><em>ctx</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_end_array" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.yajl_end_map">
-<tt class="descname">yajl_end_map</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_end_map" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_end_map</code><span class="sig-paren">(</span><em>ctx</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_end_map" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.yajl_map_key">
-<tt class="descname">yajl_map_key</tt><big>(</big><em>ctx</em>, <em>stringVal</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_map_key" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_map_key</code><span class="sig-paren">(</span><em>ctx</em>, <em>stringVal</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_map_key" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.yajl_null">
-<tt class="descname">yajl_null</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_null" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_null</code><span class="sig-paren">(</span><em>ctx</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_null" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.yajl_start_array">
-<tt class="descname">yajl_start_array</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_start_array" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_start_array</code><span class="sig-paren">(</span><em>ctx</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_start_array" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.yajl_start_map">
-<tt class="descname">yajl_start_map</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_start_map" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_start_map</code><span class="sig-paren">(</span><em>ctx</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_start_map" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlContentHandler.yajl_string">
-<tt class="descname">yajl_string</tt><big>(</big><em>ctx</em>, <em>stringVal</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_string" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_string</code><span class="sig-paren">(</span><em>ctx</em>, <em>stringVal</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler.yajl_string" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.YajlContentHandler._abc_cache">
-<tt class="descname">_abc_cache</tt><em class="property"> = &lt;_weakrefset.WeakSet object at 0x7fc451f0f090&gt;</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_cache" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_abc_cache</code><em class="property"> = &lt;_weakrefset.WeakSet object&gt;</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_cache" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.YajlContentHandler._abc_negative_cache">
-<tt class="descname">_abc_negative_cache</tt><em class="property"> = &lt;_weakrefset.WeakSet object at 0x7fc451f0f110&gt;</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_negative_cache" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_abc_negative_cache</code><em class="property"> = &lt;_weakrefset.WeakSet object&gt;</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_negative_cache" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.YajlContentHandler._abc_negative_cache_version">
-<tt class="descname">_abc_negative_cache_version</tt><em class="property"> = 20</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_negative_cache_version" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_abc_negative_cache_version</code><em class="property"> = 26</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_negative_cache_version" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.YajlContentHandler._abc_registry">
-<tt class="descname">_abc_registry</tt><em class="property"> = &lt;_weakrefset.WeakSet object at 0x7fc451f08f90&gt;</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_registry" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_abc_registry</code><em class="property"> = &lt;_weakrefset.WeakSet object&gt;</em><a class="headerlink" href="#yajl.yajl_parse.YajlContentHandler._abc_registry" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="yajl.yajl_parse.YajlParser">
-<em class="property">class </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">YajlParser</tt><big>(</big><em>content_handler=None</em>, <em>buf_siz=65536</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<em class="property">class </em><code class="descclassname">yajl.yajl_parse.</code><code class="descname">YajlParser</code><span class="sig-paren">(</span><em>content_handler=None</em>, <em>buf_siz=65536</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>A class that utilizes the Yajl C Library</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>content_handler</strong> (<a class="reference internal" href="#yajl.yajl_parse.YajlContentHandler" title="yajl.yajl_parse.YajlContentHandler"><tt class="xref py py-class docutils literal"><span class="pre">YajlContentHandler</span></tt></a>) &#8211; content handler instance hosting the
+<li><strong>content_handler</strong> (<a class="reference internal" href="#yajl.yajl_parse.YajlContentHandler" title="yajl.yajl_parse.YajlContentHandler"><code class="xref py py-class docutils literal"><span class="pre">YajlContentHandler</span></code></a>) &#8211; content handler instance hosting the
 callbacks that will be called while parsing.</li>
 <li><strong>buf_siz</strong> (<em>int</em>) &#8211; number of bytes to process from the input stream
 at a time (minimum 1)</li>
@@ -249,7 +177,7 @@ for example:</p>
 <div>to enable yajl_allow_comments, set self.allow_comments=True</div></blockquote>
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlParser.parse">
-<tt class="descname">parse</tt><big>(</big><em>f=&lt;open file '&lt;stdin&gt;'</em>, <em>mode 'r' at 0x7fc45509b0c0&gt;</em>, <em>ctx=None</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser.parse" title="Permalink to this definition">¶</a></dt>
+<code class="descname">parse</code><span class="sig-paren">(</span><em>f=&lt;open file '&lt;stdin&gt;'</em>, <em>mode 'r'&gt;</em>, <em>ctx=None</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlParser.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function to parse a JSON stream.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -263,8 +191,7 @@ preserved using the content_handler instance.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name" colspan="2">Raises YajlError:</th></tr>
-<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first last">When invalid JSON in input stream found</p>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>YajlError</strong> &#8211; When invalid JSON in input stream found</p>
 </td>
 </tr>
 </tbody>
@@ -273,83 +200,83 @@ preserved using the content_handler instance.</li>
 
 <dl class="method">
 <dt id="yajl.yajl_parse.YajlParser.yajl_config">
-<tt class="descname">yajl_config</tt><big>(</big><em>hand</em><big>)</big><a class="headerlink" href="#yajl.yajl_parse.YajlParser.yajl_config" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_config</code><span class="sig-paren">(</span><em>hand</em><span class="sig-paren">)</span><a class="headerlink" href="#yajl.yajl_parse.YajlParser.yajl_config" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="yajl.yajl_parse.yajl_callbacks">
-<em class="property">class </em><tt class="descclassname">yajl.yajl_parse.</tt><tt class="descname">yajl_callbacks</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">_ctypes.Structure</span></tt></p>
+<em class="property">class </em><code class="descclassname">yajl.yajl_parse.</code><code class="descname">yajl_callbacks</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">_ctypes.Structure</span></code></p>
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks._fields_">
-<tt class="descname">_fields_</tt><em class="property"> = [('yajl_null', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_boolean', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_integer', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_double', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_number', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_string', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_start_map', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_map_key', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_end_map', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_start_array', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_end_array', &lt;class 'ctypes.CFunctionType'&gt;)]</em><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks._fields_" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_fields_</code><em class="property"> = [('yajl_null', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_boolean', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_integer', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_double', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_number', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_string', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_start_map', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_map_key', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_end_map', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_start_array', &lt;class 'ctypes.CFunctionType'&gt;), ('yajl_end_array', &lt;class 'ctypes.CFunctionType'&gt;)]</em><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks._fields_" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_boolean">
-<tt class="descname">yajl_boolean</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_boolean" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_boolean</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_boolean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_double">
-<tt class="descname">yajl_double</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_double" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_double</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_double" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_end_array">
-<tt class="descname">yajl_end_array</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_end_array" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_end_array</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_end_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_end_map">
-<tt class="descname">yajl_end_map</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_end_map" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_end_map</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_end_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_integer">
-<tt class="descname">yajl_integer</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_integer" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_integer</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_integer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_map_key">
-<tt class="descname">yajl_map_key</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_map_key" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_map_key</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_map_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_null">
-<tt class="descname">yajl_null</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_null" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_null</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_null" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_number">
-<tt class="descname">yajl_number</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_number" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_number</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_number" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_start_array">
-<tt class="descname">yajl_start_array</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_start_array" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_start_array</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_start_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_start_map">
-<tt class="descname">yajl_start_map</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_start_map" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_start_map</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_start_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="yajl.yajl_parse.yajl_callbacks.yajl_string">
-<tt class="descname">yajl_string</tt><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_string" title="Permalink to this definition">¶</a></dt>
+<code class="descname">yajl_string</code><a class="headerlink" href="#yajl.yajl_parse.yajl_callbacks.yajl_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Structure/Union member</p>
 </dd></dl>
 
@@ -359,65 +286,74 @@ preserved using the content_handler instance.</li>
 
 
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="yajl_gen.html" class="btn btn-neutral" title="yajl.yajl_gen"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 2010, Hatem Nassrat.
-    </p>
-  </div>
-
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
-</footer>
         </div>
       </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">yajl</a><ul>
+      <li>Previous: <a href="yajl_gen.html" title="previous chapter">yajl.yajl_gen</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/yajl/yajl_parse.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2010, Hatem Nassrat.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="../sources/yajl/yajl_parse.txt"
+          rel="nofollow">Page source</a>
+    </div>
 
-    </section>
+    
+    <a href="https://github.com/pykler/yajl-py" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
 
-  </div>
-  
-
-
-  
-
+    
     <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'2.1.1',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19175962-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
     </script>
-      <script type="text/javascript" src="../static/jquery.js"></script>
-      <script type="text/javascript" src="../static/underscore.js"></script>
-      <script type="text/javascript" src="../static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../static/js/theme.js"></script>
-  
-
-  
-  
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
-      });
-  </script>
-   
-
-</body>
+    
+  </body>
 </html>

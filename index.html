@@ -1,111 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Yajl-Py documentation &mdash; Yajl-Py 2.1.1 documentation</title>
-  
-
-  
-  
-
-  
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  
-  
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-
-  
-
-  
-  
-    <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="top" title="Yajl-Py 2.1.1 documentation" href="#"/>
-        <link rel="next" title="yajl" href="yajl/index.html"/>
-     
+    <title>Yajl-Py documentation &mdash; Yajl-Py 2.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-19175962-1']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
     </script>
-
-
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="Yajl-Py 2.1.1 documentation" href="#" />
+    <link rel="next" title="yajl" href="yajl/index.html" />
+   
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-</head>
+  </head>
+  <body role="document">  
 
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        <a href="#" class="fa fa-home"> Yajl-Py</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-      </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
-        
-            <ul>
-<li class="toctree-l1"><a class="reference internal" href="yajl/index.html">yajl</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="yajl/index.html#sub-modules">Sub-Modules</a></li>
-</ul>
-</li>
-</ul>
-
-        
-      </div>
-      &nbsp;
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="#">Yajl-Py</a>
-      </nav>
-
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="#">Docs</a> &raquo;</li>
-      
-    <li>Yajl-Py documentation</li>
-      <li class="wy-breadcrumbs-aside">
-        
-          <a href="sources/index.txt" rel="nofollow"> View page source</a>
-        
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main">
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
             
   <div class="section" id="yajl-py-documentation">
 <h1>Yajl-Py documentation<a class="headerlink" href="#yajl-py-documentation" title="Permalink to this headline">¶</a></h1>
@@ -126,18 +56,18 @@ uses ctypes to interface with yajl&#8217;s routines, and thus allows for using
 any yajl routine even if it isn&#8217;t explicitly wrapped in yajl-py. yajl-py
 aims to be as pythonic as possible and still be consistent with the
 general style of yajl itself. This can be seen by comparing
-<a class="reference internal" href="#yajl-py-examples"><em>yajl-py examples</em></a> with the
+<a class="reference internal" href="#yajl-py-examples"><span class="std std-ref">yajl-py examples</span></a> with the
 <a class="reference external" href="http://lloyd.github.com/yajl/">examples of yajl</a> itself.</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>To install the latest version of yajl-py, run:</p>
-<div class="highlight-python"><div class="highlight"><pre>pip install yajl-py
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">yajl</span><span class="o">-</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>For the development version you may visit
 <a class="reference external" href="http://github.com/pykler/yajl-py">yajl-py at github</a>:</p>
-<div class="highlight-python"><div class="highlight"><pre>pip install git+https://github.com/pykler/yajl-py.git
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pykler</span><span class="o">/</span><span class="n">yajl</span><span class="o">-</span><span class="n">py</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </div>
@@ -167,53 +97,53 @@ that one can follow the logic.</p>
 <h3>Quick Example<a class="headerlink" href="#quick-example" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="parsing">
 <h4>Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">yajl</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="c"># Sample callbacks, which output some debug info</span>
-<span class="c"># these are examples to show off the yajl parser</span>
+<span class="c1"># Sample callbacks, which output some debug info</span>
+<span class="c1"># these are examples to show off the yajl parser</span>
 <span class="k">class</span> <span class="nc">ContentHandler</span><span class="p">(</span><span class="n">YajlContentHandler</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
     <span class="k">def</span> <span class="nf">yajl_null</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;null</span><span class="se">\n</span><span class="s">&quot;</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;null</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="p">)</span>
     <span class="k">def</span> <span class="nf">yajl_boolean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">boolVal</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;bool: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="s">&#39;true&#39;</span> <span class="k">if</span> <span class="n">boolVal</span> <span class="k">else</span> <span class="s">&#39;false&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;bool: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">boolVal</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">yajl_integer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">integerVal</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;integer: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">integerVal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;integer: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">integerVal</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">yajl_double</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">doubleVal</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;double: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">doubleVal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;double: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">doubleVal</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">yajl_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">stringNum</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; Since this is defined both integer and double callbacks are useless &#39;&#39;&#39;</span>
-        <span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stringNum</span><span class="p">)</span> <span class="k">if</span> <span class="s">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">stringNum</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">stringNum</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;number: </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">num</span><span class="p">)</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stringNum</span><span class="p">)</span> <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">stringNum</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">stringNum</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;number: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">num</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">yajl_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">stringVal</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;string: &#39;</span><span class="si">%s</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">stringVal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;string: &#39;</span><span class="si">%s</span><span class="s2">&#39;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">stringVal</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">yajl_start_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;map open &#39;{&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;map open &#39;{&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">yajl_map_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">stringVal</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;key: &#39;</span><span class="si">%s</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span><span class="n">stringVal</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;key: &#39;</span><span class="si">%s</span><span class="s2">&#39;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span><span class="n">stringVal</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">yajl_end_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;map close &#39;}&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;map close &#39;}&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">yajl_start_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;array open &#39;[&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;array open &#39;[&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">yajl_end_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;array close &#39;]&#39;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;array close &#39;]&#39;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c"># Create the parser</span>
+<span class="c1"># Create the parser</span>
 <span class="n">parser</span> <span class="o">=</span> <span class="n">YajlParser</span><span class="p">(</span><span class="n">ContentHandler</span><span class="p">())</span>
-<span class="c"># Parse JSON from stdin</span>
+<span class="c1"># Parse JSON from stdin</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="generating">
 <h4>Generating<a class="headerlink" href="#generating" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">yajl</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">yajl</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">g</span> <span class="o">=</span> <span class="n">YajlGen</span><span class="p">(</span><span class="n">beautify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_map_open</span><span class="p">()</span>
-<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_string</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_string</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_array_open</span><span class="p">()</span>
 <span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_null</span><span class="p">()</span>
 <span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_bool</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
@@ -222,14 +152,14 @@ that one can follow the logic.</p>
 <span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_number</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_get_buf</span><span class="p">()</span>
-<span class="c"># [Out]: &#39;{&quot;a&quot;:[null,true,1,2,3&#39;</span>
+<span class="c1"># [Out]: &#39;{&quot;a&quot;:[null,true,1,2,3&#39;</span>
 
-<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_string</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_string</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
 <span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_array_close</span><span class="p">()</span>
 <span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_map_close</span><span class="p">()</span>
 
 <span class="n">g</span><span class="o">.</span><span class="n">yajl_gen_get_buf</span><span class="p">()</span>
-<span class="c"># [Out]: &#39;,&quot;b&quot;]}&#39;</span>
+<span class="c1"># [Out]: &#39;,&quot;b&quot;]}&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -240,11 +170,11 @@ that one can follow the logic.</p>
 <p>yajl-py internally is divided in a similar way as yajl&#8217;s C api. However,
 for flexibility all the classes, methods and structures implemented in
 each of the submodules is directly available under the main yajl module.
-Therefore using <tt class="docutils literal"><span class="pre">yajl.yajl_parse.YajlParser</span></tt> is the same as using
-<tt class="docutils literal"><span class="pre">yajl.YajlParser</span></tt> and similarly <tt class="docutils literal"><span class="pre">yajl.yajl_gen.YajlGen</span></tt> is the same as
-using <tt class="docutils literal"><span class="pre">yajl.YajlGen</span></tt>. The shared object (dll in windows, and dylib for
-bsd/MacOSX) is accessible as <tt class="docutils literal"><span class="pre">yajl.yajl_common.yajl</span></tt> or simply
-<tt class="docutils literal"><span class="pre">yajl.yajl</span></tt>. Generally, you will not need to interact with the shared
+Therefore using <code class="docutils literal"><span class="pre">yajl.yajl_parse.YajlParser</span></code> is the same as using
+<code class="docutils literal"><span class="pre">yajl.YajlParser</span></code> and similarly <code class="docutils literal"><span class="pre">yajl.yajl_gen.YajlGen</span></code> is the same as
+using <code class="docutils literal"><span class="pre">yajl.YajlGen</span></code>. The shared object (dll in windows, and dylib for
+bsd/MacOSX) is accessible as <code class="docutils literal"><span class="pre">yajl.yajl_common.yajl</span></code> or simply
+<code class="docutils literal"><span class="pre">yajl.yajl</span></code>. Generally, you will not need to interact with the shared
 object directly, if this is the case then it is a short-comming of
 yajl-py.</p>
 <p>The following links lead to documentation generated from the yajl-py
@@ -267,73 +197,101 @@ docstrings:</p>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
-<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 
 
           </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="yajl/index.html" class="btn btn-neutral float-right" title="yajl"/>Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-    </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>
-        &copy; Copyright 2010, Hatem Nassrat.
-    </p>
-  </div>
-
-  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
-</footer>
         </div>
       </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Yajl-Py documentation</a><ul>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#alternatives">Alternatives</a></li>
+<li><a class="reference internal" href="#versioning">Versioning</a></li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#quick-example">Quick Example</a><ul>
+<li><a class="reference internal" href="#parsing">Parsing</a></li>
+<li><a class="reference internal" href="#generating">Generating</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#documentaion">Documentaion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="yajl/index.html" title="next chapter">yajl</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2010, Hatem Nassrat.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="sources/index.txt"
+          rel="nofollow">Page source</a>
+    </div>
 
-    </section>
+    
+    <a href="https://github.com/pykler/yajl-py" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
 
-  </div>
-  
-
-
-  
-
+    
     <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'2.1.1',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
-        };
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19175962-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
     </script>
-      <script type="text/javascript" src="static/jquery.js"></script>
-      <script type="text/javascript" src="static/underscore.js"></script>
-      <script type="text/javascript" src="static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="static/js/theme.js"></script>
-  
-
-  
-  
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
-      });
-  </script>
-   
-
-</body>
+    
+  </body>
 </html>

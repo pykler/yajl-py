@@ -9,17 +9,23 @@ Common functions and members used by yajl-py (parse and gen)
 
 from ctypes import *
 
+
 class YajlException(Exception):
     pass
+
 
 class YajlConfigError(YajlException):
     pass
 
+
 class YajlError(YajlException):
+
     def __init__(self, value=''):
         self.value = value
+
     def __str__(self):
         return self.value
+
 
 def load_yajl():
     '''
@@ -30,13 +36,15 @@ def load_yajl():
     :raises OSError: when libyajl cannot be loaded
     '''
     for ftype in '', '.so', '.dylib':
-        yajlso = 'libyajl%s' %(ftype)
+        yajlso = 'libyajl%s' % (ftype)
         try:
             return cdll.LoadLibrary(yajlso)
         except OSError:
             pass
-    raise OSError('Yajl shared object cannot be found. '
+    raise OSError(
+        'Yajl shared object cannot be found. '
         'Please install Yajl and confirm it is on your shared lib path.')
+
 
 def get_yajl_version():
     '''
@@ -45,8 +53,8 @@ def get_yajl_version():
     :rtype: string
     :returns: yajl's version in the format 'Major.Minor.Micro'
     '''
-    v = '%0.6d' %yajl.yajl_version()
-    return '%s.%s.%s' %tuple(map(int, [v[:-4], v[-4:-2], v[-2:]]))
+    v = '%0.6d' % yajl.yajl_version()
+    return '%s.%s.%s' % tuple(map(int, [v[:-4], v[-4:-2], v[-2:]]))
 
 yajl = load_yajl()
 
@@ -66,6 +74,7 @@ yajl.yajl_get_bytes_consumed.restype = c_size_t
 yajl.yajl_get_bytes_consumed.argtypes = [c_void_p]
 yajl.yajl_free_error.restype = None
 yajl.yajl_free_error.argtypes = [c_void_p, c_char_p]
+
 # Yajl Gen
 yajl.yajl_gen_config.argtypes = [c_void_p, c_int]
 yajl.yajl_gen_alloc.restype = c_void_p

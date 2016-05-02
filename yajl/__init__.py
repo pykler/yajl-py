@@ -14,8 +14,10 @@ from yajl_common import *
 from yajl_parse import *
 from yajl_gen import *
 
+
 __version__ = '2.1.1'
 yajl_version = get_yajl_version()
+
 
 def check_yajl_version():
     '''
@@ -28,22 +30,27 @@ def check_yajl_version():
         import warnings
         warnings.warn(
             'Using Yajl-Py v%s with Yajl v%s. '
-            'It is advised to use the same Yajl-Py and Yajl versions' %(
+            'It is advised to use the same Yajl-Py and Yajl versions' % (
                 __version__, yajl_version),
             RuntimeWarning, stacklevel=3)
         return False
     return True
 
+
 check_yajl_version()
+
 
 # monkey patch yajl, because anyjson devs are slacking off,
 # and I got an issue request that I would like to help out.
 class Wrapper(object):
-  def __init__(self, wrapped):
-    self.wrapped = wrapped
-  def __getattr__(self, name):
-    if name in ('dumps', 'loads'):
-        raise ImportError('this is not py-yajl ... anyjson!')
-    return getattr(self.wrapped, name)
+
+    def __init__(self, wrapped):
+        self.wrapped = wrapped
+
+        def __getattr__(self, name):
+            if name in ('dumps', 'loads'):
+                raise ImportError('this is not py-yajl ... anyjson!')
+            return getattr(self.wrapped, name)
+
 
 sys.modules[__name__] = Wrapper(sys.modules[__name__])

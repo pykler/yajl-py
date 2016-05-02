@@ -18,15 +18,17 @@ yajl_gen_status = {
 yajl_gen_status_ok = 0
 
 (
-yajl_gen_beautify,
-yajl_gen_indent_string,
-yajl_gen_print_callback,
-yajl_gen_validate_utf8,
-yajl_gen_escape_solidus,
-) = map(c_int, [2**x for x in range(5)])
+    yajl_gen_beautify,
+    yajl_gen_indent_string,
+    yajl_gen_print_callback,
+    yajl_gen_validate_utf8,
+    yajl_gen_escape_solidus,
+) = map(c_int, [2 ** x for x in range(5)])
+
 
 class YajlGenException(YajlError):
     pass
+
 
 class YajlGen(object):
     '''
@@ -54,13 +56,15 @@ class YajlGen(object):
             ('validate_utf8', yajl_gen_validate_utf8),
             ('gen_escape_solidus', yajl_gen_escape_solidus),
         ])
-        for k,v in kwargs.items():
+        for k, v in kwargs.items():
             self._yajl_gen('yajl_gen_config', config_map[k], v)
 
     def __del__(self):
         self._yajl_gen('yajl_gen_free')
+
     def yajl_gen_reset(self, sep=''):
         self._yajl_gen('yajl_gen_reset', sep)
+
     def _assert_retval(self, retval):
         '''
         :param retval: yajl_gen_status return code
@@ -69,6 +73,7 @@ class YajlGen(object):
         '''
         if retval != yajl_gen_status_ok:
             raise YajlGenException(yajl_gen_status[retval])
+
     def yajl_gen_get_buf(self):
         '''
         :returns: Formatted JSON
@@ -87,12 +92,14 @@ class YajlGen(object):
             return string_at(buf, l.value)
         finally:
             self._yajl_gen('yajl_gen_clear')
+
     def _yajl_gen(self, name, *args):
         '''
         Call the underlying yajl_gen c function/method
         ``self.g`` must be already allocated
         '''
         return getattr(yajl, name)(self.g, *args)
+
     def _dispatch(self, name, *args):
         '''
         :param name: yajl func ``name`` to dispatch to
@@ -103,30 +110,33 @@ class YajlGen(object):
         Asserts that the returned value is proper or raises the proper
         ``YajlGenException``
         '''
-        self._assert_retval(
-            self._yajl_gen(name, *args)
-        )
+        self._assert_retval(self._yajl_gen(name, *args))
+
     def yajl_gen_null(self):
         ''' Generate json value ``null`` '''
         self._dispatch('yajl_gen_null')
+
     def yajl_gen_bool(self, b):
         '''
         :param b: flag to be jsonified
         :type b: bool
         '''
         self._dispatch('yajl_gen_bool', b)
+
     def yajl_gen_integer(self, n):
         '''
         :param n: number to be jsonified
         :type n: int
         '''
         self._dispatch('yajl_gen_integer', c_longlong(n))
+
     def yajl_gen_double(self, n):
         '''
         :param n: number to be jsonified
         :type n: float
         '''
         self._dispatch('yajl_gen_double', c_double(n))
+
     def yajl_gen_number(self, s):
         '''
         :param s: number to be jsonified
@@ -136,21 +146,26 @@ class YajlGen(object):
         or :meth:`yajl_gen_integer` respectively.
         '''
         self._dispatch('yajl_gen_number', c_char_p(s), len(s))
+
     def yajl_gen_string(self, s):
         '''
         :param s: string to be jsonified
         :type s: string
         '''
         self._dispatch('yajl_gen_string', c_char_p(s), len(s))
+
     def yajl_gen_map_open(self):
         ''' indicate json map begin '''
         self._dispatch('yajl_gen_map_open')
+
     def yajl_gen_map_close(self):
         ''' indicate json map close '''
         self._dispatch('yajl_gen_map_close')
+
     def yajl_gen_array_open(self):
         ''' indicate json array begin '''
         self._dispatch('yajl_gen_array_open')
+
     def yajl_gen_array_close(self):
         ''' indicate json array close '''
         self._dispatch('yajl_gen_array_close')

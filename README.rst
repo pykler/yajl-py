@@ -3,11 +3,26 @@ yajl-py
 =======
 
 
-.. image:: https://travis-ci.org/pykler/yajl-py.png?branch=master
-   :target: https://travis-ci.org/pykler/yajl-py
+.. image:: https://img.shields.io/travis/pykler/yajl-py.svg
+    :target: https://travis-ci.org/pykler/yajl-py
 
-.. image:: https://coveralls.io/repos/pykler/yajl-py/badge.png
-   :target: https://coveralls.io/r/pykler/yajl-py
+.. image:: https://img.shields.io/coveralls/pykler/yajl-py.svg
+    :target: https://coveralls.io/r/pykler/yajl-py
+
+.. image:: https://img.shields.io/pypi/v/yajl-py.svg
+    :target: https://pypi.python.org/pypi/yajl-py
+
+.. image:: https://img.shields.io/github/issues/pykler/yajl-py.svg?maxAge=86400
+    :target: https://github.com/pykler/yajl-py/issues
+
+.. image:: https://img.shields.io/github/forks/pykler/yajl-py.svg?style=social
+    :target: https://github.com/pykler/yajl-py
+
+.. image:: https://img.shields.io/github/stars/pykler/yajl-py.svg?style=social
+    :target: https://github.com/pykler/yajl-py
+
+.. image:: https://img.shields.io/github/watchers/pykler/yajl-py.svg?style=social
+   :target: https://github.com/pykler/yajl-py/subscription
 
 ``yajl-py`` is a Pure Python wrapper (implemented using
 ctypes) to the excellent Yajl (Yet Another JSON Library) C

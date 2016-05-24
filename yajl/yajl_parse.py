@@ -3,7 +3,7 @@ Code that allows use of api/yajl_parse.h
 '''
 
 import sys
-from yajl_common import *
+from .yajl_common import *
 from abc import ABCMeta, abstractmethod
 
 # Callback Functions
@@ -40,20 +40,20 @@ yajl_dont_validate_strings,
 yajl_allow_trailing_garbage,
 yajl_allow_multiple_values,
 yajl_allow_partial_values
-) = map(c_int, [2**x for x in range(5)])
+) = list(map(c_int, [2**x for x in range(5)]))
 
 # yajl_status
 (
 yajl_status_ok,
 yajl_status_client_canceled,
 yajl_status_error
-) = map(c_int, range(3))
+) = list(map(c_int, list(range(3))))
 
 class YajlParseCancelled(YajlError):
     def __init__(self):
         self.value = 'Client Callback Cancelled Parse'
 
-class YajlContentHandler(object):
+class YajlContentHandler(object, metaclass=ABCMeta):
     '''
     Subclass this Abstract Base Class and implement the callback routines that
     will be called by the :class:`YajlParser` instance that you will pass an
@@ -79,7 +79,6 @@ class YajlContentHandler(object):
     this is a yajl feature that is implemented in yajl-py but not very useful
     in python.  see :meth:`YajlParser.parse` for more info on :obj:`ctx`.
     '''
-    __metaclass__ = ABCMeta
     @abstractmethod
     def yajl_null(self, ctx):
         pass
@@ -155,13 +154,13 @@ class YajlParser(object):
         def yajl_double(ctx, doubleVal):
             return dispatch('yajl_double', ctx, doubleVal)
         def yajl_number(ctx, stringVal, stringLen):
-            return dispatch('yajl_number', ctx, string_at(stringVal, stringLen))
+            return dispatch('yajl_number', ctx, string_at(stringVal, stringLen).decode('utf-8'))
         def yajl_string(ctx, stringVal, stringLen):
-            return dispatch('yajl_string', ctx, string_at(stringVal, stringLen))
+            return dispatch('yajl_string', ctx, string_at(stringVal, stringLen).decode('utf-8'))
         def yajl_start_map(ctx):
             return dispatch('yajl_start_map', ctx)
         def yajl_map_key(ctx, stringVal, stringLen):
-            return dispatch('yajl_map_key', ctx, string_at(stringVal, stringLen))
+            return dispatch('yajl_map_key', ctx, string_at(stringVal, stringLen).decode('utf-8'))
         def yajl_end_map(ctx):
             return dispatch('yajl_end_map', ctx)
         def yajl_start_array(ctx):
@@ -172,7 +171,7 @@ class YajlParser(object):
             try:
                 getattr(self.content_handler, func)(*args, **kwargs)
                 return 1
-            except Exception,e:
+            except Exception as e:
                 self._exc_info = sys.exc_info()
                 return 0
 
@@ -232,7 +231,7 @@ class YajlParser(object):
         self.yajl_config(hand)
         try:
             while 1:
-                fileData = f.read(self.buf_siz)
+                fileData = f.read(self.buf_siz).encode('utf-8')
                 if not fileData:
                     stat = yajl.yajl_complete_parse(hand)
                 else:
@@ -244,13 +243,12 @@ class YajlParser(object):
                         # it means we have an exception
                         if self._exc_info:
                             exc_info = self._exc_info
-                            raise exc_info[0], exc_info[1], exc_info[2]
+                            raise exc_info[0](exc_info[1]).with_traceback(exc_info[2])
                         else: # for some reason we have no error stored
                             raise YajlParseCancelled()
                     else:
                         yajl.yajl_get_error.restype = c_char_p
-                        error = yajl.yajl_get_error(
-                            hand, 1, fileData, len(fileData))
+                        error = yajl.yajl_get_error(hand, 1, fileData, len(fileData))
                         raise YajlError(error)
                 if not fileData:
                     if self.content_handler:

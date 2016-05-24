@@ -10,6 +10,7 @@ tmp/
 # py compiled files
 *.pyc
 *.pyo
+*.bak
 
 # python garbage
 dist/
@@ -23,3 +24,6 @@ yajl-src
 .virtualenv/
 .vagrant/
 Vagrantfile
+
+.coverage
+.idea

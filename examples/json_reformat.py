@@ -31,7 +31,7 @@ class ReformatContentHandler(YajlContentHandler):
             indent_string=self.indent_string,
         )
     def parse_buf(self):
-        self.out.write(self.g.yajl_gen_get_buf())
+        self.out.write(self.g.yajl_gen_get_buf().decode('utf-8'))
     def parse_complete(self):
         if not stream:
             # not necessary, gc will do this @ python shutdown

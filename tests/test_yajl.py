@@ -1,6 +1,6 @@
-from yajl_test_lib import yajl
+from .yajl_test_lib import yajl
 from minimocktest import MockTestCase
-from StringIO import StringIO
+from io import StringIO
 import sys
 
 class BaseContentHandler(yajl.YajlContentHandler):
@@ -92,13 +92,13 @@ class YajlParserTests(MockTestCase):
         )
 
     def test_largestNumberAcceptableInIntegerCallback(self):
-        good_json = StringIO('[%s]' %(sys.maxint))
-        bad_json = StringIO('[%s]' %(sys.maxint+1))
+        good_json = StringIO('[%s]' %(sys.maxsize))
+        bad_json = StringIO('[%s]' %(sys.maxsize+1))
         self.mock('self.content_handler.yajl_integer')
         parser = yajl.YajlParser(self.content_handler)
         parser.parse(good_json)
         self.assertSameTrace(
-            "Called self.content_handler.yajl_integer(None, %s)\n" %sys.maxint
+            "Called self.content_handler.yajl_integer(None, %s)\n" %sys.maxsize
         )
         self.assertRaises(yajl.YajlError, parser.parse, bad_json)
 
@@ -109,7 +109,7 @@ class YajlParserTests(MockTestCase):
             'start_array', 'end_array']:
             self.mock('self.content_handler.yajl_%s' %(func))
         parser = yajl.YajlParser(self.content_handler)
-        ctx = yajl.create_string_buffer('TEST')
+        ctx = yajl.create_string_buffer('TEST'.encode('utf-8'))
         parser.parse(self.basic_json, ctx=yajl.byref(ctx))
         self.assertSameTrace(
             "Called self.content_handler.yajl_start_map(%(ctx)s)\n"
@@ -175,11 +175,12 @@ class YajlGenTests(MockTestCase):
     def test_YajlGen_streamedOutput(self):
         g = yajl.YajlGen(beautify=False)
         results = list(self._yajl_gen_sample(g))
-        self.assertEqual(',"b"]}', results[1])
+        self.assertEqual(',"b"]}', results[1].decode('utf-8'))
 
     def test_YajlGen_minimizeOutput(self):
         g = yajl.YajlGen(beautify=False)
         results = self._yajl_gen_sample(g)
+        results = [each.decode('utf-8') for each in results]
         self.assertEqual(
             '{"a":[null,true,1,-6.5,3,"b"]}',
             ''.join(results))
@@ -187,6 +188,7 @@ class YajlGenTests(MockTestCase):
     def test_YajlGen_beautifyOutput(self):
         g = yajl.YajlGen(beautify=True)
         results = self._yajl_gen_sample(g)
+        results = [each.decode('utf-8') for each in results]
         self.assertEqual(
             '{\n'
             '    "a": [\n'
@@ -203,6 +205,7 @@ class YajlGenTests(MockTestCase):
     def test_YajlGen_indentOutput(self):
         g = yajl.YajlGen(beautify=True, indent_string="\t")
         results = self._yajl_gen_sample(g)
+        results = [each.decode('utf-8') for each in results]
         self.assertEqual(
             '{\n'
             '\t"a": [\n'
@@ -225,9 +228,8 @@ class YajlCommonTests(MockTestCase):
         e = None
         try:
             yajl.load_yajl()
-        except OSError, e:
-            pass
-        self.assertTrue('Yajl shared object cannot be found.' in str(e))
+        except OSError as e:
+            self.assertTrue('Yajl shared object cannot be found.' in str(e))
 
     def test_get_yajl_version_correctlyParsesYajlVersion(self):
         for major in [0, 1, 3, 7]:
@@ -248,12 +250,7 @@ class YajlCommonTests(MockTestCase):
         self.assertSameTrace('')
         self.mock('yajl.wrapped.yajl_version', mock_obj='1.1.0')
         self.assertFalse(yajl.check_yajl_version())
-        self.assertSameTrace(
-            "Called warnings.warn("
-                "'Using Yajl-Py v1.1.1 with Yajl v1.1.0. "
-                "It is advised to use the same Yajl-Py and Yajl versions',"
-                "<type 'exceptions.RuntimeWarning'>, stacklevel=3)"
-        )
+        self.assertSameTrace("Called warnings.warn(\n\t 'Using Yajl-Py v1.1.1 with Yajl v1.1.0. It is advised to use the same Yajl-Py and Yajl versions', \n\t <class 'RuntimeWarning'>, \n\t stacklevel=3)")
 
     def test_checkYajlPyAndYajlHaveSameVersion(self):
         self.assertTrue(yajl.check_yajl_version())

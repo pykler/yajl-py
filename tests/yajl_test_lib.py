@@ -9,4 +9,4 @@ sys.path = [BASEPATH, '%s/..' %BASEPATH] + sys.path
 import yajl
 import unittest
 from minimocktest import MockTestCase
-from StringIO import StringIO
+from io import StringIO

@@ -19,6 +19,7 @@ class ContentHandler(YajlContentHandler):
         self.out.write("double: %s\n" %doubleVal)
     def yajl_number(self, ctx, stringNum):
         ''' Since this is defined both integer and double callbacks are useless '''
+        stringNum = stringNum.decode('utf-8')
         num = float(stringNum) if '.' in stringNum else int(stringNum)
         self.out.write("number: %s\n" %num)
     def yajl_string(self, ctx, stringVal):

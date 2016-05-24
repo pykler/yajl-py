@@ -11,7 +11,7 @@ usage:
 	@echo Targets
 	@echo " install :" pip install yajl-py
 	@echo " deps    :" install compatible yajl version
-	@echo " test    :" run yajl-py tests 
+	@echo " test    :" run yajl-py tests
 	@echo " doc     :" install docs to gh-pages branch
 
 install:

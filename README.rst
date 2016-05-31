@@ -35,23 +35,19 @@ not fit in memory.
 Dependencies
 ------------
 
-    - python 2.6 (or compatible)
+    - python 2.7+, python 3.3+
     - `yajl <http://lloyd.github.com/yajl/>`_
 
 To run the tests you also require:
 
     - make (to run ``make test``)
     - nose (debian package == ``python-nose``)
-    - MiniMockTest (``pip install minimocktest``)
+    - mock (``pip install mock``)
 
 Install
 -------
 
 From within the current directory run::
-
-    python setup.py install
-
-        - OR Alternatively -
 
     pip install .
 
@@ -64,6 +60,22 @@ Usage
 
 The examples directory contains full featured JSON Parsers built using
 ``yajl`` and ``yajl-py``. See `examples/README.rst <examples/>`_ for more info.
+
+Notes around strings, python 3, and yajl-py
+-------------------------------------------
+
+TLDR; if using python3, yajl-py expects bytes and not strings
+
+Python 3 fixed a whole string of issues with strings. Due to these fixes
+somethings taken for granted in python 2 are now explicit in python 3. The
+major change that affects yajl-py is related to a decision made within ctypes.
+
+Strings going and coming from the ctypes interface to c-code are now bytes.
+Although we can make an explicit decision to decode and encode strings
+transparently to latin-1 or utf-8, this is an arbitrary choice. Even
+though it can be coded in such a way to make the encoding configurable, the
+decision has been made to keep with the decision made by ctypes and hence put
+the onus on the developer to decode/encode the input/output as necessary.
 
 Contributions
 -------------

@@ -24,3 +24,6 @@ yajl-src
 .ropeproject/
 .vagrant/
 Vagrantfile
+
+# testing stuff
+\.coverage

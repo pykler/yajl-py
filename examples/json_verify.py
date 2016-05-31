@@ -2,6 +2,7 @@
 Python implementation of the Yajl C json_verify application
 '''
 
+import six
 import os
 import sys
 BASEPATH = os.path.dirname(os.path.realpath(__file__))
@@ -31,12 +32,12 @@ def main():
     retval = 0
     try:
         yajl_parser.parse()
-    except YajlError, e:
+    except YajlError as e:
         retval = 1
         if options.verbose:
-            sys.stderr.write(str(e))
+            sys.stderr.write(e.value)
     if options.verbose:
-        print "JSON is %s" %("invalid" if retval else "valid")
+        six.print_("JSON is %s" %("invalid" if retval else "valid"))
     raise SystemExit(retval)
 
 if __name__ == "__main__":

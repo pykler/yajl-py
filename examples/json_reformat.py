@@ -20,7 +20,7 @@ class ReformatContentHandler(YajlContentHandler):
     '''
     Content handler to reformat a json file using yajl_gen
     '''
-    def __init__(self, beautify=True, indent_string="  ", stream=False):
+    def __init__(self, beautify=True, indent_string=b"  ", stream=False):
         self.out = sys.stdout
         self.beautify = beautify
         self.indent_string = indent_string
@@ -31,7 +31,7 @@ class ReformatContentHandler(YajlContentHandler):
             indent_string=self.indent_string,
         )
     def parse_buf(self):
-        self.out.write(self.g.yajl_gen_get_buf())
+        self.out.write(self.g.yajl_gen_get_buf().decode('utf-8'))
     def parse_complete(self):
         if not stream:
             # not necessary, gc will do this @ python shutdown
@@ -41,7 +41,7 @@ class ReformatContentHandler(YajlContentHandler):
             func(*args, **kwargs)
         except YajlGenException as e:
             if self.stream and e.value == 'yajl_gen_generation_complete':
-                self.g.yajl_gen_reset('\n')
+                self.g.yajl_gen_reset(b'\n')
                 func(*args, **kwargs)
             else:
                 raise

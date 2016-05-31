@@ -7,7 +7,10 @@ Common functions and members used by yajl-py (parse and gen)
     used to call any external api functions exported by yajl into libyajl.
 '''
 
-from ctypes import *
+from ctypes import (
+    cdll, c_void_p, c_char_p, c_size_t, c_bool,
+    c_int, c_longlong, c_double,
+)
 
 class YajlException(Exception):
     pass

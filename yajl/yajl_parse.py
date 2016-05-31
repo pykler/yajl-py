@@ -3,8 +3,13 @@ Code that allows use of api/yajl_parse.h
 '''
 
 import sys
-from yajl_common import *
+import six
 from abc import ABCMeta, abstractmethod
+from .yajl_common import yajl, YajlError, YajlConfigError
+from ctypes import (
+    Structure, CFUNCTYPE, POINTER, byref, string_at,
+    c_void_p, c_char_p, c_ubyte, c_int, c_uint, c_longlong, c_double,
+)
 
 # Callback Functions
 YAJL_NULL = CFUNCTYPE(c_int, c_void_p)
@@ -135,8 +140,8 @@ class YajlParser(object):
 
         To configure the parser you need to set attributes. Attribute
         names are similar to that of yajl names less the "yajl_" prefix,
-        for example: 
-            to enable yajl_allow_comments, set self.allow_comments=True 
+        for example:
+            to enable yajl_allow_comments, set self.allow_comments=True
         '''
         # input validation
         if buf_siz <= 0:
@@ -172,7 +177,7 @@ class YajlParser(object):
             try:
                 getattr(self.content_handler, func)(*args, **kwargs)
                 return 1
-            except Exception,e:
+            except Exception:
                 self._exc_info = sys.exc_info()
                 return 0
 
@@ -226,6 +231,10 @@ class YajlParser(object):
          preserved using the content_handler instance.
         :raises YajlError: When invalid JSON in input stream found
         '''
+        if f is sys.stdin and hasattr(f, 'buffer'):
+            # raw binary buffer available use instead
+            # needed to read bytes in python3
+            f = f.buffer
         if self.content_handler:
             self.content_handler.parse_start()
         hand = yajl.yajl_alloc(self.callbacks, None, ctx)
@@ -244,13 +253,16 @@ class YajlParser(object):
                         # it means we have an exception
                         if self._exc_info:
                             exc_info = self._exc_info
-                            raise exc_info[0], exc_info[1], exc_info[2]
+                            six.reraise(exc_info[0], exc_info[1], exc_info[2])
                         else: # for some reason we have no error stored
                             raise YajlParseCancelled()
                     else:
                         yajl.yajl_get_error.restype = c_char_p
                         error = yajl.yajl_get_error(
                             hand, 1, fileData, len(fileData))
+                        # in python3 error is bytes so must be encoded
+                        # to something printable
+                        error = error.decode('latin-1')
                         raise YajlError(error)
                 if not fileData:
                     if self.content_handler:

@@ -3,7 +3,11 @@ Code that allows use of api/yajl_gen.h
 
 '''
 
-from yajl_common import *
+from .yajl_common import YajlError, yajl
+from ctypes import (
+    POINTER, byref, string_at, c_ubyte, c_char_p,
+    c_int, c_uint, c_longlong, c_double,
+)
 
 yajl_gen_status = {
     0: 'yajl_gen_status_ok',

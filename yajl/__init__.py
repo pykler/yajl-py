@@ -10,10 +10,23 @@ Pure Python wrapper to the Yajl C library
     Version of the yajl library that was loaded
 '''
 
-from yajl_common import *
-from yajl_parse import *
-from yajl_gen import *
+import sys
 
+from .yajl_common import (
+    YajlException, YajlConfigError, YajlError, get_yajl_version,
+)
+from .yajl_parse import (
+    YajlParseCancelled, YajlContentHandler, YajlParser,
+)
+from .yajl_gen import (
+    YajlGenException, YajlGen,
+)
+
+__all__ = [
+    'YajlException', 'YajlConfigError', 'YajlError',
+    'YajlParseCancelled', 'YajlGenException',
+    'YajlContentHandler', 'YajlParser', 'YajlGen',
+]
 __version__ = '2.1.1'
 yajl_version = get_yajl_version()
 
@@ -38,6 +51,7 @@ check_yajl_version()
 
 # monkey patch yajl, because anyjson devs are slacking off,
 # and I got an issue request that I would like to help out.
+# see https://bitbucket.org/runeh/anyjson/pull-requests/5/
 class Wrapper(object):
   def __init__(self, wrapped):
     self.wrapped = wrapped

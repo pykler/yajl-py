@@ -32,12 +32,14 @@ def load_yajl():
     :returns: The yajl shared object
     :raises OSError: when libyajl cannot be loaded
     '''
-    for ftype in '', '.so', '.dylib':
-        yajlso = 'libyajl%s' %(ftype)
+    fnames = ['libyajl%s' %(t) for t in ['', '.so', '.dylib']] + ['yajl.dll']
+
+    for yajlso in fnames:
         try:
             return cdll.LoadLibrary(yajlso)
         except OSError:
             pass
+
     raise OSError('Yajl shared object cannot be found. '
         'Please install Yajl and confirm it is on your shared lib path.')
 

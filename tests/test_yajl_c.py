@@ -45,6 +45,8 @@ class YajlCTests(unittest.TestCase):
         with open('%s.gold' %filename, 'rb') as f:
             expected = f.read()
         # we currently do not test for memory leaks
+        if os.name == 'nt':
+            expected = b'\n'.join(expected.split(b'\r\n'))
         expected = expected.replace(b'memory leaks:\t0\n', b'')
         self.out.seek(0)
         got = self.out.read()

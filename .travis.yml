@@ -8,7 +8,7 @@ install:
   - "make deps"
   - "make install"
 before_script:
-  - "pip install python-coveralls --use-mirrors"
+  - "pip install coveralls"
 script: "make test"
 after_success:
   - "coveralls"

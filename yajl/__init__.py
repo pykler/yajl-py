@@ -27,7 +27,7 @@ __all__ = [
     'YajlParseCancelled', 'YajlGenException',
     'YajlContentHandler', 'YajlParser', 'YajlGen',
 ]
-__version__ = '2.1.1'
+__version__ = '2.1.2'
 yajl_version = get_yajl_version()
 
 def check_yajl_version():
@@ -37,7 +37,9 @@ def check_yajl_version():
     Returns True, if the version of yajl is identical to the version of yajl-py
     otherwise displays a RuntimeWarning and returns False.
     '''
-    if __version__ != yajl_version:
+    p_yajl_py_version = __version__.split('.')
+    p_yajl_version = yajl_version.split('.')
+    if p_yajl_py_version[:2] != p_yajl_version[:2]:
         import warnings
         warnings.warn(
             'Using Yajl-Py v%s with Yajl v%s. '

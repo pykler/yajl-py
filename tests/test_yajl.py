@@ -255,17 +255,17 @@ class YajlCommonTests(unittest.TestCase):
         with mock.patch('warnings.warn') as warn:
             with mock.patch.multiple(yajl.wrapped,
                 __version__='1.1.1',
-                yajl_version='1.1.1',
+                yajl_version='1.1.2', # major and minor version matching
             ):
                 self.assertTrue(yajl.check_yajl_version())
                 self.assertFalse(warn.called)
             with mock.patch.multiple(yajl.wrapped,
                 __version__='1.1.1',
-                yajl_version='1.1.0',
+                yajl_version='1.0.0',
             ):
                 self.assertFalse(yajl.check_yajl_version())
                 warn.assert_called_with(
-                    "Using Yajl-Py v1.1.1 with Yajl v1.1.0. It is advised "
+                    "Using Yajl-Py v1.1.1 with Yajl v1.0.0. It is advised "
                     "to use the same Yajl-Py and Yajl versions",
                     RuntimeWarning, stacklevel=3
                 )

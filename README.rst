@@ -36,7 +36,7 @@ Dependencies
 ------------
 
     - python 2.7+, python 3.3+
-    - `yajl <http://lloyd.github.com/yajl/>`_
+    - `yajl <http://lloyd.github.io/yajl/>`_
 
 To run the tests you also require:
 

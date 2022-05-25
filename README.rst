@@ -77,6 +77,17 @@ though it can be coded in such a way to make the encoding configurable, the
 decision has been made to keep with the decision made by ctypes and hence put
 the onus on the developer to decode/encode the input/output as necessary.
 
+Test Manually
+-------------
+
+To run tests manually, install ``mock``, ``nose`` and ``nose-cov`` from pip::
+
+    pip install -r test_requirements.txt
+
+and run::
+
+    python -m nose --with-cov --cover-erase --cov yajl -v tests/
+
 Contributions
 -------------
 

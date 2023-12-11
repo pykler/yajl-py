@@ -1,10 +1,27 @@
-from setuptools import setup, find_packages
-import sys, os
+import re
 
-from yajl import __version__ as version
+from setuptools import setup, find_packages
+
+
+def get_version() -> str:
+    """
+    Read the version value from the __init__ file without importing it.
+    This fixes the missing dependencies issue when installing the package.
+    """
+    file_path = "yajl/__init__.py"
+    version_pattern = re.compile(r"__version__\s*=\s*['\"]([^'\"]+)['\"]")
+    with open(file_path, 'r') as file:
+        for line in file:
+            match = version_pattern.search(line)
+            if match:
+                return match.group(1)
+
+    # If we get here, we didn't find a version - raise an exception.
+    raise RuntimeError("Unable to find version string.")
+
 
 setup(name='yajl-py',
-      version=version,
+      version=get_version(),
       description="Pure Python Yajl Wrapper",
       long_description="""\
 Pure Python wrapper to the excellent Yajl (Yet Another Json Library) C library""",
